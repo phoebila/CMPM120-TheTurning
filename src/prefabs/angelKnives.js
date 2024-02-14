@@ -11,7 +11,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         // set custom Hero properties
         this.direction = direction 
         this.angelVelocity = 100    // in pixels
-        this.hurtTimer = 250       // in ms
+        this.hurtTimer = 200       // in ms
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.angelFSM = new StateMachine('idle', {

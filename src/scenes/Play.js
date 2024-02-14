@@ -28,6 +28,11 @@ class Play extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, this.map.width, this.map.height)
         // this.cameras.main.startFollow(this.angelKnives, false, 0.5, .5)
         this.physics.world.setBounds(0, 0, this.map.width, this.map.height)
+
+        // adding ground 
+        let h = game.config.height;
+        this.platform = this.physics.add.staticGroup()
+        this.platform.create(320.5, h+210, "platform").refreshBody()
     }
 
     update() {
