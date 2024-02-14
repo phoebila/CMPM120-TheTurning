@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
         this.map = this.add.image(0, 0, 'map').setOrigin(0)
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
-        this.angelKnives = new AngelKnives(this, 200, 150, 'hero', 0, 'down')
+        this.angelKnives = new AngelKnives(this, 345, 260, 'hero', 0, 'left')
 
         // setup keyboard input
         this.keys = this.input.keyboard.createCursorKeys()
@@ -22,7 +22,7 @@ class Play extends Phaser.Scene {
         }, this)
 
         // update instruction text
-        document.getElementById('info').innerHTML = '<strong>CharacterFSM.js:</strong> Arrows: move | SPACE: attack | SHIFT: dash attack | F: spin attack | H: hurt (knockback) | D: debug (toggle)'
+        document.getElementById('info').innerHTML = '<strong>CharacterFSM.js:</strong> Arrows: move | SPACE: attack | H: hurt (knockback) | D: debug (toggle) | B: Block'
     
         //cams 
         this.cameras.main.setBounds(0, 0, this.map.width, this.map.height)
