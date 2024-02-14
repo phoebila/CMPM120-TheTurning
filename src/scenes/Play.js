@@ -26,7 +26,7 @@ class Play extends Phaser.Scene {
     
         //cams 
         this.cameras.main.setBounds(0, 0, this.map.width, this.map.height)
-        this.cameras.main.startFollow(this.angelKnives, false, 0.5, .5)
+        // this.cameras.main.startFollow(this.angelKnives, false, 0.5, .5)
         this.physics.world.setBounds(0, 0, this.map.width, this.map.height)
     }
 
