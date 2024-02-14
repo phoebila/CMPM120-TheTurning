@@ -13,7 +13,7 @@ class Play extends Phaser.Scene {
         // setup keyboard input
         this.keys = this.input.keyboard.createCursorKeys()
         this.keys.HKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)
-        this.keys.FKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F)
+        this.keys.BKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B)
 
         // debug key listener (assigned to D key)
         this.input.keyboard.on('keydown-D', function() {

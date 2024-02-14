@@ -16,22 +16,10 @@ class Load extends Phaser.Scene {
     create() {
         // hero animations (walking)
         this.anims.create({
-            key: 'walk-down',
-            frameRate: 8,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('hero', { start: 0, end: 3 }),
-        })
-        this.anims.create({
             key: 'walk-right',
             frameRate: 8,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('hero', { start: 4, end: 7 }),
-        })
-        this.anims.create({
-            key: 'walk-up',
-            frameRate: 8,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('hero', { start: 8, end: 11 }),
         })
         this.anims.create({
             key: 'walk-left',
@@ -64,16 +52,6 @@ class Load extends Phaser.Scene {
             frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('hero', { start: 28, end: 31 }),
-        })
-
-        // add cirucular attack
-        this.anims.create({
-            key: 'circular-attack',
-            frameRate: 24,
-            repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', {
-                frames: [16, 16, 16, 17, 18, 24, 25, 26, 21, 22, 30, 29, 28, 18, 19, 19, 19, ]
-            })
         })
 
         // proceed once loading completes
