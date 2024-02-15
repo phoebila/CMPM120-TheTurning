@@ -17,17 +17,17 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.fangFSM = new StateMachine('idle', {
-            idle: new IdleState(),
-            move: new MoveState(),
-            attack: new AttackState(),
-            block: new BlockState(),
-            hurt: new HurtState(),
+            idle: new IdleStateFang(),
+            move: new MoveStateFang(),
+            attack: new AttackStateFang(),
+            block: new BlockStateFang(),
+            hurt: new HurtStateFang(),
         }, [scene, this])   // pass these as arguments to maintain scene/object context in the FSM
     }
 }
 
 // hero-specific state classes
-class IdleState extends State {
+class IdleStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
         fang.anims.play(`walk-${fang.direction}`)
@@ -36,12 +36,15 @@ class IdleState extends State {
 
     execute(scene, fang) {
         // use destructuring to make a local copy of the keyboard object
-        const { left, right, space, shift} = scene.keys
-        const HKey = scene.keys.HKey
-        const BKey = scene.keys.BKey
+        const AKey = scene.keys.AKey //left 
+        const DKey = scene.keys.DKey //right
+        const FKey = scene.keys.FKey //attack
+        const RKey = scene.keys.RKey //block
+        const HKey = scene.keys.HKey //hurt 
+
 
         // transition to swing if pressing space
-        if(Phaser.Input.Keyboard.JustDown(space)) {
+        if(Phaser.Input.Keyboard.JustDown(FKey)) {
             this.stateMachine.transition('attack')
             return
         }
@@ -52,30 +55,32 @@ class IdleState extends State {
             return
         }
 
-        // block if B key input
-        if(Phaser.Input.Keyboard.JustDown(shift)) {
+        // block if R key input
+        if(Phaser.Input.Keyboard.JustDown(RKey)) {
             this.stateMachine.transition('block')
             return
         }
 
         // transition to move if pressing a movement key
-        if(left.isDown || right.isDown) {
+        if(AKey.isDown || DKey.isDown) {
             this.stateMachine.transition('move')
             return
         }
     }
 }
 
-class MoveState extends State {
+class MoveStateFang extends State {
     execute(scene, fang) {
         // use destructuring to make a local copy of the keyboard object
-        const { left, right, space, shift} = scene.keys
-        const HKey = scene.keys.HKey
-        const BKey = scene.keys.BKey
+        const AKey = scene.keys.AKey //left 
+        const DKey = scene.keys.DKey //right
+        const FKey = scene.keys.FKey //attack
+        const RKey = scene.keys.RKey //block
+        const HKey = scene.keys.HKey //hurt 
 
 
         // transition to swing if pressing space
-        if(Phaser.Input.Keyboard.JustDown(space)) {
+        if(Phaser.Input.Keyboard.JustDown(FKey)) {
             this.stateMachine.transition('attack')
             return
         }
@@ -87,24 +92,24 @@ class MoveState extends State {
             return
         }
 
-        // block if B key input
-        if(Phaser.Input.Keyboard.JustDown(shift)) {
+        // block if R key input
+        if(Phaser.Input.Keyboard.JustDown(RKey)) {
             this.stateMachine.transition('block')
             return
         }
 
         // transition to idle if not pressing movement keys
-        if(!(left.isDown || right.isDown)) {
+        if(!(AKey.isDown || DKey.isDown)) {
             this.stateMachine.transition('idle')
             return
         }
 
         // handle movement
         let moveDirection = new Phaser.Math.Vector2(0, 0)
-        if(left.isDown) {
+        if(AKey.isDown) {
             moveDirection.x = -1
             fang.direction = 'left'
-        } else if(right.isDown) {
+        } else if(DKey.isDown) {
             moveDirection.x = 1
             fang.direction = 'right'
         }
@@ -115,7 +120,7 @@ class MoveState extends State {
     }
 }
 
-class AttackState extends State {
+class AttackStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
         fang.anims.play(`swing-${fang.direction}`)
@@ -127,7 +132,7 @@ class AttackState extends State {
     }
 }
 
-class HurtState extends State {
+class HurtStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
         fang.anims.play(`walk-${fang.direction}`)
@@ -151,7 +156,7 @@ class HurtState extends State {
     }
 }
 
-class BlockState extends State {
+class BlockStateFang extends State {
     enter(scene, fang){
         fang.setVelocity(0)
         // play block anims
