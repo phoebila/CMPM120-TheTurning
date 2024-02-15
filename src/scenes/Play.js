@@ -8,7 +8,10 @@ class Play extends Phaser.Scene {
         this.map = this.add.image(0, 0, 'map').setOrigin(0)
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
-        this.angelKnives = new AngelKnives(this, 345, 260, 'hero', 0, 'left')
+        this.angelKnives = new AngelKnives(this, 345, 250, 'hero', 0, 'left')
+
+        //adding Blackfang
+        this.blackFang = new AngelKnives(this, 145, 250, 'hero', 0, 'right')
 
         // setup keyboard input
         this.keys = this.input.keyboard.createCursorKeys()
@@ -33,6 +36,12 @@ class Play extends Phaser.Scene {
         let h = game.config.height;
         this.platform = this.physics.add.staticGroup()
         this.platform.create(320.5, h+210, "platform").refreshBody()
+
+        this.physics.add.collider(this.angelKnives, this.platform)
+        this.physics.add.collider(this.blackFang, this.platform)
+        this.physics.add.collider(this.angelKnives, this.blackFang)
+
+
     }
 
     update() {

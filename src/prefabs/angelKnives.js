@@ -7,6 +7,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
 
         this.body.setSize(this.width / 2, this.height / 2)
         this.body.setCollideWorldBounds(true)
+        this.body.gravity.y = 1000
 
         // set custom Hero properties
         this.direction = direction 
@@ -34,7 +35,7 @@ class IdleState extends State {
 
     execute(scene, angel) {
         // use destructuring to make a local copy of the keyboard object
-        const { left, right, up, down, space} = scene.keys
+        const { left, right, space} = scene.keys
         const HKey = scene.keys.HKey
         const BKey = scene.keys.BKey
 
@@ -57,7 +58,7 @@ class IdleState extends State {
         }
 
         // transition to move if pressing a movement key
-        if(left.isDown || right.isDown || up.isDown || down.isDown ) {
+        if(left.isDown || right.isDown) {
             this.stateMachine.transition('move')
             return
         }
@@ -67,7 +68,7 @@ class IdleState extends State {
 class MoveState extends State {
     execute(scene, angel) {
         // use destructuring to make a local copy of the keyboard object
-        const { left, right, up, down, space} = scene.keys
+        const { left, right, space} = scene.keys
         const HKey = scene.keys.HKey
         const BKey = scene.keys.BKey
 
@@ -92,7 +93,7 @@ class MoveState extends State {
         }
 
         // transition to idle if not pressing movement keys
-        if(!(left.isDown || right.isDown || up.isDown || down.isDown)) {
+        if(!(left.isDown || right.isDown)) {
             this.stateMachine.transition('idle')
             return
         }

@@ -33,18 +33,6 @@ class Load extends Phaser.Scene {
 
         // hero animations (swinging)
         this.anims.create({
-            key: 'swing-down',
-            frameRate: 8,
-            repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', { start: 16, end: 19 }),
-        })
-        this.anims.create({
-            key: 'swing-up',
-            frameRate: 8,
-            repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', { start: 20, end: 23 }),
-        })
-        this.anims.create({
             key: 'swing-right',
             frameRate: 8,
             repeat: 0,
