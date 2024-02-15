@@ -11,21 +11,27 @@ class Play extends Phaser.Scene {
         this.angelKnives = new AngelKnives(this, 345, 250, 'hero', 0, 'left')
 
         //adding Blackfang
-        this.blackFang = new AngelKnives(this, 145, 250, 'hero', 0, 'right')
+        this.blackFang = new BlackFang(this, 145, 250, 'hero', 0, 'right')
 
-        // setup keyboard input
+        // setup keyboard input PLAYER 1 -----------------------------------------------
         this.keys = this.input.keyboard.createCursorKeys()
-        this.keys.HKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)
-        this.keys.BKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B)
+        this.keys.HKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H) //hurt
+
+        // setup keybinds input PLAYER 2 -----------------------------------------------
+        this.keys.AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A) //left
+        this.keys.DKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D) //right
+        this.keys.FKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F) //attack
+        this.keys.RKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R) //block
+
 
         // debug key listener (assigned to D key)
-        this.input.keyboard.on('keydown-D', function() {
+        this.input.keyboard.on('keydown-X', function() {
             this.physics.world.drawDebug = this.physics.world.drawDebug ? false : true
             this.physics.world.debugGraphic.clear()
         }, this)
 
         // update instruction text
-        document.getElementById('info').innerHTML = '<strong>CharacterFSM.js:</strong> Arrows: move | SPACE: attack | H: hurt (knockback) | D: debug (toggle) | B: Block'
+        document.getElementById('info').innerHTML = '<strong>CharacterFSM.js:</strong> Arrows: move | SPACE: attack | H: hurt (knockback) | X: debug (toggle) | B: Block'
     
         //cams 
         this.cameras.main.setBounds(0, 0, this.map.width, this.map.height)

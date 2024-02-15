@@ -1,5 +1,5 @@
-// angelKnives prefab
-class AngelKnives extends Phaser.Physics.Arcade.Sprite {
+// blackFang prefab
+class BlackFang extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, frame, direction) {
         super(scene, x, y, texture, frame) // call Sprite parent class
         scene.add.existing(this)           // add Hero to existing scene
@@ -11,12 +11,12 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
 
         // set custom Hero properties
         this.direction = direction 
-        this.angelVelocity = 100    // in pixels
+        this.fangVelocity = 100    // in pixels
         this.hurtTimer = 200       // in ms
         this.blockCoolDown = 300 // blocking cooldown
 
         // initialize state machine managing hero (initial state, possible states, state args[])
-        scene.angelFSM = new StateMachine('idle', {
+        scene.fangFSM = new StateMachine('idle', {
             idle: new IdleState(),
             move: new MoveState(),
             attack: new AttackState(),
@@ -28,13 +28,13 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
 
 // hero-specific state classes
 class IdleState extends State {
-    enter(scene, angel) {
-        angel.setVelocity(0)
-        angel.anims.play(`walk-${angel.direction}`)
-        angel.anims.stop()
+    enter(scene, fang) {
+        fang.setVelocity(0)
+        fang.anims.play(`walk-${fang.direction}`)
+        fang.anims.stop()
     }
 
-    execute(scene, angel) {
+    execute(scene, fang) {
         // use destructuring to make a local copy of the keyboard object
         const { left, right, space, shift} = scene.keys
         const HKey = scene.keys.HKey
@@ -67,7 +67,7 @@ class IdleState extends State {
 }
 
 class MoveState extends State {
-    execute(scene, angel) {
+    execute(scene, fang) {
         // use destructuring to make a local copy of the keyboard object
         const { left, right, space, shift} = scene.keys
         const HKey = scene.keys.HKey
@@ -103,23 +103,23 @@ class MoveState extends State {
         let moveDirection = new Phaser.Math.Vector2(0, 0)
         if(left.isDown) {
             moveDirection.x = -1
-            angel.direction = 'left'
+            fang.direction = 'left'
         } else if(right.isDown) {
             moveDirection.x = 1
-            angel.direction = 'right'
+            fang.direction = 'right'
         }
-        // normalize movement vector, update angel position, and play proper animation
+        // normalize movement vector, update fang position, and play proper animation
         moveDirection.normalize()
-        angel.setVelocity(angel.angelVelocity * moveDirection.x, angel.angelVelocity * moveDirection.y)
-        angel.anims.play(`walk-${angel.direction}`, true)
+        fang.setVelocity(fang.fangVelocity * moveDirection.x, fang.fangVelocity * moveDirection.y)
+        fang.anims.play(`walk-${fang.direction}`, true)
     }
 }
 
 class AttackState extends State {
-    enter(scene, angel) {
-        angel.setVelocity(0)
-        angel.anims.play(`swing-${angel.direction}`)
-        angel.once('animationcomplete', () => {
+    enter(scene, fang) {
+        fang.setVelocity(0)
+        fang.anims.play(`swing-${fang.direction}`)
+        fang.once('animationcomplete', () => {
             this.stateMachine.transition('idle')
         })
 
@@ -128,42 +128,42 @@ class AttackState extends State {
 }
 
 class HurtState extends State {
-    enter(scene, angel) {
-        angel.setVelocity(0)
-        angel.anims.play(`walk-${angel.direction}`)
-        angel.anims.stop()
-        angel.setTint(0xFF0000)     // turn red
+    enter(scene, fang) {
+        fang.setVelocity(0)
+        fang.anims.play(`walk-${fang.direction}`)
+        fang.anims.stop()
+        fang.setTint(0xFF0000)     // turn red
         // create knockback by sending body in direction opposite facing direction
-        switch(angel.direction) {
+        switch(fang.direction) {
             case 'left':
-                angel.setVelocityX(angel.angelVelocity*2)
+                fang.setVelocityX(fang.fangVelocity*2)
                 break
             case 'right':
-                angel.setVelocityX(-angel.angelVelocity*2)
+                fang.setVelocityX(-fang.fangVelocity*2)
                 break
         }
 
         // set recovery timer
-        scene.time.delayedCall(angel.hurtTimer, () => {
-            angel.clearTint()
+        scene.time.delayedCall(fang.hurtTimer, () => {
+            fang.clearTint()
             this.stateMachine.transition('idle')
         })
     }
 }
 
 class BlockState extends State {
-    enter(scene, angel){
-        angel.setVelocity(0)
+    enter(scene, fang){
+        fang.setVelocity(0)
         // play block anims
 
-        angel.anims.play(`swing-${angel.direction}`) //testing
+        fang.anims.play(`swing-${fang.direction}`) //testing
 
         // set a short cooldown delay before going back to idle
-        scene.time.delayedCall(angel.blockCoolDown, () => {
-            angel.clearTint()
+        scene.time.delayedCall(fang.blockCoolDown, () => {
+            fang.clearTint()
             this.stateMachine.transition('idle')
         })
 
-        // angel.anims.stop()
+        // fang.anims.stop()
     }
 }
