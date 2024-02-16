@@ -101,8 +101,7 @@ class Play extends Phaser.Scene {
             this.scene.start('creditsScene')
         }
 
-        if(Phaser.Input.Keyboard.JustDown(this.keys.space) || Phaser.Input.Keyboard.JustDown(this.keys.FKey)) {
-            // randomize punch sound effect?
+        if(Phaser.Input.Keyboard.JustDown(this.keys.space) || Phaser.Input.Keyboard.JustDown(this.keys.FKey)) { //punch audio
             var soundGen = Phaser.Math.Between(1, 4)
             if (soundGen == 1){
                 this.sound.play('punch1', {volume: 1})
@@ -121,6 +120,9 @@ class Play extends Phaser.Scene {
             }
         }
 
+        if(Phaser.Input.Keyboard.JustDown(this.keys.RKey) || Phaser.Input.Keyboard.JustDown(this.keys.shift)) { //block audio
+            this.sound.play('block') 
+        }
         
     }
 }

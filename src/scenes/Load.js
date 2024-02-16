@@ -43,7 +43,7 @@ class Load extends Phaser.Scene {
         this.load.audio('punch4', 'audio/punch4.wav')
         this.load.audio('punch5', 'audio/punch5.ogg')
         //block
-        this.load.audio('block', 'audio/block.wav')
+        this.load.audio('block', 'audio/block.mp3')
         //hurt
         this.load.audio('hurtAngel', 'audio/hurt_angel.wav')
         this.load.audio('hurtFang', 'audio/hurt_fang.mp3')
