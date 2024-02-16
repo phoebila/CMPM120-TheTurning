@@ -5,13 +5,13 @@ class Play extends Phaser.Scene {
 
     create() {
         // add background image
-        this.map = this.add.image(0, 0, 'map').setOrigin(0)
+        this.map = this.add.image(0, 0, 'map').setOrigin(0).setScale(.6)
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
         this.angelKnives = new AngelKnives(this, 345, 250, 'hero', 0, 'left')
 
         //adding Blackfang
-        this.blackFang = new BlackFang(this, 145, 250, 'hero', 0, 'right')
+        this.blackFang = new BlackFang(this, 45, 250, 'hero', 0, 'right')
 
         // setup keyboard input PLAYER 1 -----------------------------------------------
         this.keys = this.input.keyboard.createCursorKeys()
@@ -31,12 +31,12 @@ class Play extends Phaser.Scene {
         }, this)
 
         // update instruction text
-        document.getElementById('info').innerHTML = '<strong>CharacterFSM.js:</strong> Arrows: move | SPACE: attack | H: hurt (knockback) | X: debug (toggle) | B: Block'
+        // document.getElementById('info').innerHTML = '<strong>CharacterFSM.js:</strong> Arrows: move | SPACE: attack | H: hurt (knockback) | X: debug (toggle) | B: Block'
     
         //cams 
-        this.cameras.main.setBounds(0, 0, this.map.width, this.map.height)
+        // this.cameras.main.setBounds(0, 0, this.map.width, this.map.height)
         // this.cameras.main.startFollow(this.angelKnives, false, 0.5, .5)
-        this.physics.world.setBounds(0, 0, this.map.width, this.map.height)
+        // this.physics.world.setBounds(0, 0, this.map.width, this.map.height)
 
         // adding ground 
         let h = game.config.height;

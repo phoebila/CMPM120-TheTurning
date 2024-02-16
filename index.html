@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FSM</title>
+    <title>The Turning</title>
     <script src="./lib/phaser.js"></script>
     <script src="./src/scenes/Load.js"></script>
     <script src="./lib/StateMachine.js"></script>
@@ -12,6 +12,24 @@
     <script src="./src/scenes/Play.js"></script>
     <script src="./src/main.js"></script>
 </head>
+<link rel="preload" as="font" href='./assets/font/pixel_font.ttf' type="font/ttf" />
+    <!-- <div style="font-family: 'quicksand';">yippee</div> -->
+    <div style="font-family:pixel; position:absolute; left:-1000px; visibility:hidden;">.</div>
+
+    <style>
+        body {
+            background-color: #4877c7;
+        }
+        @font-face {
+            font-family: 'pixel';
+            src: url('./assets/font/pixel_font.ttf');
+        }
+        canvas {
+            display : block;   
+            margin : auto;
+            font-family: 'pixel';
+        }
+    </style>
 <body>
     <div id="phaser-game"></div>
     <span id="info"></span>
