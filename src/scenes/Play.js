@@ -5,9 +5,16 @@ class Play extends Phaser.Scene {
 
     create() {
         //set up audio ---------------------------------------
-        this.music = this.sound.add('fighting_music', {volume: .1});
-        this.music.setLoop(true);
-        this.music.play();
+        // this.music = this.sound.add('fighting_music', {volume: .1});
+        // this.music.setLoop(true);
+        // this.music.play();
+
+        // add fight countdown
+        // this.fightSequence = this.sound.add('fight-sequence', {volume: .3});
+        // this.fightSequence.play();
+
+        // this.punch1 = this.sound.add('punch1', {volume: .1});
+        // this.punch1.play();
 
         // add background image
         // create webm of pixelized ellie playing!!!
@@ -46,7 +53,6 @@ class Play extends Phaser.Scene {
         // this.physics.world.setBounds(0, 0, this.map.width, this.map.height)
 
         // adding ground 
-        let h = game.config.height;
         this.platform = this.physics.add.staticGroup()
         this.platform.create(320.5, h+210, "platform").refreshBody()
 
@@ -94,5 +100,27 @@ class Play extends Phaser.Scene {
             this.music.stop()
             this.scene.start('creditsScene')
         }
+
+        if(Phaser.Input.Keyboard.JustDown(this.keys.space) || Phaser.Input.Keyboard.JustDown(this.keys.FKey)) {
+            // randomize punch sound effect?
+            var soundGen = Phaser.Math.Between(1, 4)
+            if (soundGen == 1){
+                this.sound.play('punch1', {volume: 1})
+            }
+            if (soundGen == 2){
+                this.sound.play('punch2', {volume: 1})
+            }
+            if (soundGen == 3){
+                this.sound.play('punch3', {volume: 1})
+            }
+            if (soundGen == 4){
+                this.sound.play('punch4', {volume: 1})
+            }
+            if (soundGen == 5){
+                this.sound.play('punch5', {volume: 1})
+            }
+        }
+
+        
     }
 }

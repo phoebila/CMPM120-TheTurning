@@ -122,7 +122,6 @@ class AttackState extends State {
         angel.once('animationcomplete', () => {
             this.stateMachine.transition('idle')
         })
-
         //if collision -> lower health points, update health bar (go to hurt state)
     }
 }

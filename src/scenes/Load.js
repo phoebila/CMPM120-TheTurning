@@ -31,8 +31,28 @@ class Load extends Phaser.Scene {
         //background movie
         this.load.video('EllieBG', 'webm/ElliePixelMov.mp4', true);
 
-        //audios
+        //audios -----------------------------
+        //background
         this.load.audio('fighting_music', 'audio/main_fight.mp3')
+        //fight sequence
+        this.load.audio('fight-sequence', 'audio/fight-sequence.wav')
+        //punch audio
+        this.load.audio('punch1', 'audio/punch1.wav')
+        this.load.audio('punch2', 'audio/punch2.mp3')
+        this.load.audio('punch3', 'audio/punch3.wav')
+        this.load.audio('punch4', 'audio/punch4.wav')
+        this.load.audio('punch5', 'audio/punch5.ogg')
+        //block
+        this.load.audio('block', 'audio/block.wav')
+        //hurt
+        this.load.audio('hurtAngel', 'audio/hurt_angel.wav')
+        this.load.audio('hurtFang', 'audio/hurt_fang.mp3')
+        //death
+        this.load.audio('death', 'audio/death.wav')
+
+
+
+
     }
 
     create() {
