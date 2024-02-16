@@ -5,6 +5,8 @@ class Play extends Phaser.Scene {
 
     create() {
         // add background image
+
+        // create webm of pixelized ellie playing!!!
         this.map = this.add.image(0, 0, 'map').setOrigin(0).setScale(.6)
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
