@@ -54,5 +54,10 @@ class Play extends Phaser.Scene {
         // make sure we step (ie update) the hero's state machine
         this.angelFSM.step()
         this.fangFSM.step()
+
+        //debugging 
+        if (Phaser.Input.Keyboard.JustDown(this.keys.up)){
+            this.scene.start('creditsScene')
+        }
     }
 }
