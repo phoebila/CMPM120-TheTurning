@@ -28,7 +28,14 @@ let centerY = game.config.height/2;
 let w = game.config.width;
 let h = game.config.height;
 let cursors;
+let angelHealth;
+let fangHealth;
 
 // set UI sizes
 let borderUISize = game.config.height / 15
 let borderPadding = borderUISize / 3
+
+// credits
+// Music from #Uppbeat (free for Creators!):
+// https://uppbeat.io/t/danijel-zambo/game-over
+// License code: ZL380LGWYXN5HQHC

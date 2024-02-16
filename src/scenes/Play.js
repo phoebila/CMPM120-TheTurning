@@ -4,10 +4,13 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        // add background image
+        //set up audio ---------------------------------------
+        this.music = this.sound.add('fighting_music', {volume: .1});
+        this.music.setLoop(true);
+        this.music.play();
 
+        // add background image
         // create webm of pixelized ellie playing!!!
-        // this.map = this.add.image(0, 0, 'map').setOrigin(0).setScale(.6)
         this.background = this.add.video(0, 0, 'EllieBG').setOrigin(0).setScale(.2)
         this.background.play(true)
 
@@ -51,7 +54,34 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.blackFang, this.platform)
         this.physics.add.collider(this.angelKnives, this.blackFang)
 
+        //health bars: https://phasergames.com/how-to-make-a-health-bar-in-phaser-3/
+        angelHealth = this.makeBar(50,20,0xfff914).setScale(.2)
+        this.setValue(angelHealth,100);
 
+        fangHealth = this.makeBar(245,20,0xfff914).setScale(.2)
+        this.setValue(fangHealth,100);
+
+    }
+    makeBar(x, y,color) {
+        //draw the bar
+        let bar = this.add.graphics();
+
+        //color the bar
+        bar.fillStyle(color, 1);
+
+        //fill the bar with a rectangle
+        bar.fillRect(0, 0, 100, 50);
+        
+        //position the bar
+        bar.x = x;
+        bar.y = y;
+
+        //return the bar
+        return bar;
+    }
+    setValue(bar,percentage) {
+        //scale the bar
+        bar.scaleX = percentage/100;
     }
 
     update() {
@@ -60,7 +90,8 @@ class Play extends Phaser.Scene {
         this.fangFSM.step()
 
         //debugging 
-        if (Phaser.Input.Keyboard.JustDown(this.keys.up)){
+        if (Phaser.Input.Keyboard.JustDown(this.keys.up)){ //either blackfang or angel knives wins
+            this.music.stop()
             this.scene.start('creditsScene')
         }
     }

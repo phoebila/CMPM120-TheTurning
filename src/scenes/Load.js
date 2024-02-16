@@ -30,6 +30,9 @@ class Load extends Phaser.Scene {
 
         //background movie
         this.load.video('EllieBG', 'webm/ElliePixelMov.mp4', true);
+
+        //audios
+        this.load.audio('fighting_music', 'audio/main_fight.mp3')
     }
 
     create() {
@@ -63,5 +66,6 @@ class Load extends Phaser.Scene {
 
         // proceed once loading completes
         this.scene.start('titleScene')
+        // this.scene.start('playScene') //debugging
     }
 }
