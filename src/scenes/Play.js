@@ -7,13 +7,15 @@ class Play extends Phaser.Scene {
         // add background image
 
         // create webm of pixelized ellie playing!!!
-        this.map = this.add.image(0, 0, 'map').setOrigin(0).setScale(.6)
+        // this.map = this.add.image(0, 0, 'map').setOrigin(0).setScale(.6)
+        this.background = this.add.video(0, 0, 'EllieBG').setOrigin(0).setScale(.2)
+        this.background.play(true)
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
-        this.angelKnives = new AngelKnives(this, 345, 250, 'hero', 0, 'left')
+        this.angelKnives = new AngelKnives(this, 345, 200, 'hero', 0, 'left')
 
         //adding Blackfang
-        this.blackFang = new BlackFang(this, 45, 250, 'hero', 0, 'right')
+        this.blackFang = new BlackFang(this, 45, 200, 'hero', 0, 'right')
 
         // setup keyboard input PLAYER 1 -----------------------------------------------
         this.keys = this.input.keyboard.createCursorKeys()

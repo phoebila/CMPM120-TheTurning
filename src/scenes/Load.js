@@ -18,15 +18,18 @@ class Load extends Phaser.Scene {
         });
 
         // load the visual goodz
-        this.load.path = './assets/sprites/'
-        this.load.spritesheet('hero', 'hero-sheet.png', {
+        this.load.path = './assets/'
+        this.load.spritesheet('hero', 'sprites/hero-sheet.png', {
             frameWidth: 32,
             frameHeight: 32,
         })
-        this.load.image('map', 'EllieBG.png')
+        // this.load.image('map', 'sprites/EllieBG.png')
 
-        // ground --> pink carpet
-        this.load.image('platform', 'platform.png')
+        // ground --> platform
+        this.load.image('platform', 'sprites/platform.png')
+
+        //background movie
+        this.load.video('EllieBG', 'webm/ElliePixelMov.mp4', true);
     }
 
     create() {
