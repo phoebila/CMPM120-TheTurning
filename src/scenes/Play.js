@@ -5,13 +5,13 @@ class Play extends Phaser.Scene {
 
     create() {
         //set up audio ---------------------------------------
-        // this.music = this.sound.add('fighting_music', {volume: .1});
-        // this.music.setLoop(true);
-        // this.music.play();
+        this.music = this.sound.add('fighting_music', {volume: .1});
+        this.music.setLoop(true);
+        this.music.play();
 
         // add fight countdown
-        // this.fightSequence = this.sound.add('fight-sequence', {volume: .3});
-        // this.fightSequence.play();
+        this.fightSequence = this.sound.add('fight-sequence', {volume: .3});
+        this.fightSequence.play();
 
         // this.punch1 = this.sound.add('punch1', {volume: .1});
         // this.punch1.play();
