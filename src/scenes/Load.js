@@ -28,6 +28,9 @@ class Load extends Phaser.Scene {
         // ground --> platform
         this.load.image('platform', 'sprites/platform.png')
 
+        //Angel Kives headshot
+        this.load.image('angelHeadshot', 'sprites/AngelHeadshot.png')
+
         //background movie
         this.load.video('EllieBG', 'webm/ElliePixelMov.mp4', true);
 

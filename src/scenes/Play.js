@@ -23,6 +23,7 @@ class Play extends Phaser.Scene {
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
         this.angelKnives = new AngelKnives(this, 345, 200, 'hero', 0, 'left')
+        this.add.image(30, 20, 'angelHeadshot')
 
         //adding Blackfang
         this.blackFang = new BlackFang(this, 45, 200, 'hero', 0, 'right')
