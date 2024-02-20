@@ -11,25 +11,31 @@
     <script src="./src/prefabs/angelKnives.js"></script>
     <script src="./src/prefabs/blackFang.js"></script>
     <script src="./src/scenes/Play.js"></script>
-    <script src="./src/scenes/Credits.js"></script>
     <script src="./src/main.js"></script>
 </head>
-<link rel="preload" as="font" href='./assets/font/pixel_font.ttf' type="font/ttf" />
-    <!-- <div style="font-family: 'quicksand';">yippee</div> -->
+
+<link rel="preload" as="font" href='./assets/font/UpheavalPro.ttf' type="font/ttf" />
+    <div style="font-family:Upheaval; position:absolute; left:-1000px; visibility:hidden;">.</div>
+<link rel="preload" as="font" href='./assets/font/Crang.ttf' type="font/ttf" />
     <div style="font-family:pixel; position:absolute; left:-1000px; visibility:hidden;">.</div>
+<link rel="preload" as="font" href='./assets/font/nokiafc.ttf' type="font/ttf" />
+    <div style="font-family:nokia; position:absolute; left:-1000px; visibility:hidden;">.</div>
 
     <style>
         body {
-            background-color: #4877c7;
+            background-color: #000000;
+        }
+        @font-face {
+            font-family: 'Upheaval';
+            src: url('./assets/font/UpheavalPro.ttf');
         }
         @font-face {
             font-family: 'pixel';
-            src: url('./assets/font/pixel_font.ttf');
+            src: url('./assets/font/Crang.ttf');
         }
-        canvas {
-            display : block;   
-            margin : auto;
-            font-family: 'pixel';
+        @font-face {
+            font-family: 'nokia';
+            src: url('./assets/font/nokiafc.ttf');
         }
     </style>
 <body>

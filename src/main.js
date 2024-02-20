@@ -7,16 +7,20 @@
 const config = {
     parent: 'phaser-game',  // for info text
     type: Phaser.WEBGL,     // for tinting
-    width: 375,
-    height: 240,
+    width: 750,
+    height: 609,
     pixelArt: true,
-    scene: [ Load, Title, Play, Credits ],
+    scene: [ Load, Title, Play],
     zoom: 2,
     physics: {
         default: "arcade",
         arcade: {
-            debug: true
+            debug: false
         }
+    },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.HORIZONTALLY
     },
 }
 

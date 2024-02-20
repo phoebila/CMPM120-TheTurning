@@ -39,9 +39,11 @@ class IdleState extends State {
         const { left, right, space, shift} = scene.keys
         const HKey = scene.keys.HKey
         const BKey = scene.keys.BKey
+        const EnterKey = scene.keys.enter
+
 
         // transition to swing if pressing space
-        if(Phaser.Input.Keyboard.JustDown(space)) {
+        if(Phaser.Input.Keyboard.JustDown(EnterKey)) {
             this.stateMachine.transition('attack')
             return
         }
@@ -72,10 +74,12 @@ class MoveState extends State {
         const { left, right, space, shift} = scene.keys
         const HKey = scene.keys.HKey
         const BKey = scene.keys.BKey
+        const EnterKey = scene.keys.enter
+
 
 
         // transition to swing if pressing space
-        if(Phaser.Input.Keyboard.JustDown(space)) {
+        if(Phaser.Input.Keyboard.JustDown(EnterKey)) {
             this.stateMachine.transition('attack')
             return
         }

@@ -25,6 +25,11 @@ class Load extends Phaser.Scene {
         })
         // this.load.image('map', 'sprites/EllieBG.png')
 
+        //main menu background: from kvanarsd on github! https://github.com/kvanarsd/Fight-Fighters/tree/main
+        this.load.image('outline', 'sprites/Outline.png')
+        this.load.image('lighting', 'sprites/lighting.png')
+        this.load.image('mainBG', 'sprites/menuBG.png')
+
         // ground --> platform
         this.load.image('platform', 'sprites/platform.png')
 
@@ -52,9 +57,6 @@ class Load extends Phaser.Scene {
         this.load.audio('hurtFang', 'audio/hurt_fang.mp3')
         //death
         this.load.audio('death', 'audio/death.wav')
-
-
-
 
     }
 
