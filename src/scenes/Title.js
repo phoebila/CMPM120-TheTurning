@@ -79,6 +79,8 @@ class Title extends Phaser.Scene{
 
         // credits menu text
         this.credz = this.add.text(game.config.width/2.5, - borderPadding*4, 'Credits', textConfig)
+        this.credit1 = this.add.text(borderPadding*8, - borderPadding, 'Ansimuz on itch.io for character assets\nKatrina Vanarsdale for letting me use her awesome assets!!', instructConfig).setOrigin(0,0.5);
+
         // set up cursor keys
         cursors = this.input.keyboard.createCursorKeys();  
 
@@ -126,6 +128,13 @@ class Title extends Phaser.Scene{
                     repeat: 0,
                     y: "+= 122",
                 });
+                var textInInstruc = this.tweens.add({
+                    targets: [this.credit1],
+                    duration: 800,
+                    ease: 'Cubic.easeOut',
+                    repeat: 0,
+                    y: "+= 300",
+                });
 
                 // next menu
                 this.time.delayedCall(100, () => {
@@ -137,7 +146,7 @@ class Title extends Phaser.Scene{
             if(this.num == 2) {
                 // slide away text and in menu 3 text
                 var textOut = this.tweens.add({
-                    targets: [this.credz],
+                    targets: [this.credz, this.credit1],
                     duration: 800,
                     ease: 'Cubic.easeOut',
                     repeat: 0,
