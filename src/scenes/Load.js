@@ -17,13 +17,37 @@ class Load extends Phaser.Scene {
             loadingBar.destroy();
         });
 
-        // load the visual goodz
+        // Angel Knives Sprites
+        //idle
         this.load.path = './assets/'
-        this.load.spritesheet('hero', 'sprites/hero-sheet.png', {
-            frameWidth: 32,
-            frameHeight: 32,
+        this.load.spritesheet('angelIdle', 'sprites/idle.png', {
+            frameWidth: 55,
+            frameHeight: 52,
         })
-        // this.load.image('map', 'sprites/EllieBG.png')
+        //block
+        this.load.path = './assets/'
+        this.load.spritesheet('angelBlock', 'sprites/block.png', {
+            frameWidth: 73,
+            frameHeight: 58,
+        })
+        //hurt
+        this.load.path = './assets/'
+        this.load.spritesheet('angelHurt', 'sprites/hurt.png', {
+            frameWidth: 53,
+            frameHeight: 49,
+        })
+        //punch
+        this.load.path = './assets/'
+        this.load.spritesheet('angelPunch', 'sprites/punch.png', {
+            frameWidth: 71,
+            frameHeight: 54,
+        })
+        //walk
+        this.load.path = './assets/'
+        this.load.spritesheet('angelWalk', 'sprites/walk.png', {
+            frameWidth: 57,
+            frameHeight: 57,
+        })
 
         //main menu background: from kvanarsd on github! https://github.com/kvanarsd/Fight-Fighters/tree/main
         this.load.image('outline', 'sprites/Outline.png')
@@ -64,32 +88,45 @@ class Load extends Phaser.Scene {
     }
 
     create() {
-        // hero animations (walking)
+        // angel animations (idle)
         this.anims.create({
-            key: 'walk-right',
-            frameRate: 8,
+            key: 'idle',
+            frameRate: 5,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers('hero', { start: 4, end: 7 }),
-        })
-        this.anims.create({
-            key: 'walk-left',
-            frameRate: 8,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('hero', { start: 12, end: 15 }),
+            frames: this.anims.generateFrameNumbers('angelIdle', { start: 0, end: 3 }),
+            yoyo: true
         })
 
-        // hero animations (swinging)
+        //angel animations (walk - right)
         this.anims.create({
-            key: 'swing-right',
-            frameRate: 8,
-            repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', { start: 24, end: 27 }),
+            key: 'walk-right',
+            frameRate: 5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('angelWalk', { start: 0, end: 5 }),
         })
+
+        // angel animations (block)
         this.anims.create({
-            key: 'swing-left',
-            frameRate: 8,
+            key: 'angel-block',
+            frameRate: 5,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', { start: 28, end: 31 }),
+            frames: this.anims.generateFrameNumbers('angelBlock', { start: 0, end: 2 }),
+        })
+
+        //angel animations (punch)
+        this.anims.create({
+            key: 'angel-punch',
+            frameRate: 5,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('angelPunch', { start: 0, end: 2 }),
+        })
+
+         //angel animations (hurt)
+         this.anims.create({
+            key: 'angel-hurt',
+            frameRate: 5,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('angelHurt', { start: 0, end: 1 }),
         })
 
         // proceed once loading completes
