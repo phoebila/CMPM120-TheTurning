@@ -105,6 +105,7 @@ class Title extends Phaser.Scene{
             // this.scene.start('playScene')
             // credits menu
             if(this.num == 1) {
+                this.sound.play('menuSelect', {volume: .3})
                 // tween away menu 1 and tween in menu 2
                 var menu1away = this.tweens.add({
                     targets: [this.flasingTitle, this.startGame],
@@ -144,6 +145,7 @@ class Title extends Phaser.Scene{
 
             // menu 3
             if(this.num == 2) {
+                this.sound.play('menuSelect', {volume: .3})
                 // slide away text and in menu 3 text
                 var textOut = this.tweens.add({
                     targets: [this.credz, this.credit1],
@@ -176,6 +178,7 @@ class Title extends Phaser.Scene{
 
             // start game
             if(this.num == 3) {
+                this.sound.play('menuSelect', {volume: .3})
                 // snapshot code from Nathan Altice Paddle Parkour
                 let textureManager = this.textures;
                 this.game.renderer.snapshot((snapshotImage) => {

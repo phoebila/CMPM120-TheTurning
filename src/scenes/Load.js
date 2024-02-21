@@ -52,8 +52,6 @@ class Load extends Phaser.Scene {
         //audios -----------------------------
         //background
         this.load.audio('fighting_music', 'audio/main_fight.mp3')
-        //fight sequence
-        this.load.audio('fight-sequence', 'audio/fight-sequence.wav')
         //punch audio
         this.load.audio('punch1', 'audio/punch1.wav')
         this.load.audio('punch2', 'audio/punch2.mp3')
@@ -68,13 +66,16 @@ class Load extends Phaser.Scene {
         //death
         this.load.audio('death', 'audio/death.wav')
 
+        //menu select 
+        this.load.audio('menuSelect', 'audio/select.wav')
+
     }
 
     create() {
         // angel animations (idle) ------------------------------------------------------------
         this.anims.create({
             key: 'angel-idle',
-            frameRate: 5,
+            frameRate: 8,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('angelKnives', { start: 0, end: 3 }),
             yoyo: true
@@ -83,7 +84,7 @@ class Load extends Phaser.Scene {
         //angel animations (hurt)
         this.anims.create({
             key: 'angel-hurt',
-            frameRate: 5,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('angelKnives', { start: 4, end: 5 }),
         })
@@ -91,7 +92,7 @@ class Load extends Phaser.Scene {
         // angel animations (block)
         this.anims.create({
             key: 'angel-block',
-            frameRate: 5,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('angelKnives', { start: 6, end: 8 }),
         })
@@ -99,14 +100,14 @@ class Load extends Phaser.Scene {
         //angel animations (punch)
         this.anims.create({
             key: 'angel-punch',
-            frameRate: 5,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('angelKnives', { start: 9, end: 11 }),
         })
         //angel animations (walk - left)
         this.anims.create({
             key: 'angel-walk-left',
-            frameRate: 5,
+            frameRate: 8,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('angelKnives', { start: 12, end: 17 }),
         })
@@ -114,7 +115,7 @@ class Load extends Phaser.Scene {
         //angel animations (walk - right)
         this.anims.create({
             key: 'angel-walk-right',
-            frameRate: 5,
+            frameRate: 8,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('angelKnives', { start: 18, end: 23 }),
         })
@@ -122,7 +123,7 @@ class Load extends Phaser.Scene {
         // fang animations (idle) ------------------------------------------------------------
         this.anims.create({
             key: 'fang-idle',
-            frameRate: 5,
+            frameRate: 8,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('blackFang', { start: 0, end: 3 }),
             yoyo: true
@@ -131,7 +132,7 @@ class Load extends Phaser.Scene {
         // fang animations (block)
         this.anims.create({
             key: 'fang-block',
-            frameRate: 5,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('blackFang', { start: 4, end: 6 }),
         })
@@ -139,14 +140,14 @@ class Load extends Phaser.Scene {
         //fang animations (hurt)
         this.anims.create({
             key: 'fang-hurt',
-            frameRate: 5,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('blackFang', { start: 7, end: 10 }),
         })
         //fang animations (punch)
         this.anims.create({
             key: 'fang-punch',
-            frameRate: 5,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('blackFang', { start: 11, end: 13 }),
         })
@@ -154,14 +155,14 @@ class Load extends Phaser.Scene {
         //fang animations (walk - left)
         this.anims.create({
             key: 'fang-walk-left',
-            frameRate: 5,
+            frameRate: 8,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('blackFang', { start: 14, end: 17 }),
         })
          //fang animations (walk - right)
          this.anims.create({
             key: 'fang-walk-right',
-            frameRate: 5,
+            frameRate: 8,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('blackFang', { start: 18, end: 21 }),
         })

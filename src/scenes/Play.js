@@ -5,7 +5,7 @@ class Play extends Phaser.Scene {
 
     create() {
         //set up audio ---------------------------------------
-        this.music = this.sound.add('fighting_music', {volume: .1});
+        this.music = this.sound.add('fighting_music', {volume: .3});
         this.music.setLoop(true);
         this.music.play();
 
