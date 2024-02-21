@@ -52,6 +52,9 @@ class Title extends Phaser.Scene{
         //temp background
         this.tempBG = this.add.image(0,0, 'mainBG').setScale(5)
 
+        this.instrucMenu = this.add.image(50, 500, 'instrucBG').setOrigin(0)
+
+
         //arcade bg
         const arcadeOutline = this.add.image(0,0, 'outline', 0).setOrigin(0,0).setScale(.75)
         const lighting = this.add.image(0,0, 'lighting', 0).setOrigin(0,0).setScale(.75)
@@ -147,6 +150,20 @@ class Title extends Phaser.Scene{
             if(this.num == 2) {
                 this.sound.play('menuSelect', {volume: .3})
                 // slide away text and in menu 3 text
+                var menu2away = this.tweens.add({
+                    targets: [this.tempBG],
+                    duration: 800,
+                    ease: 'Linear',
+                    repeat: 0,
+                    y: "-= 500",
+                });
+                var menu3in = this.tweens.add({
+                    targets: this.instrucMenu,
+                    duration: 800,
+                    ease: 'Cubic.easeOut',
+                    repeat: 0,
+                    y: "-= 400"
+                });
                 var textOut = this.tweens.add({
                     targets: [this.credz, this.credit1],
                     duration: 800,
