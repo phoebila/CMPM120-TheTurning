@@ -42,9 +42,15 @@ class Load extends Phaser.Scene {
             frameWidth: 71,
             frameHeight: 54,
         })
-        //walk
+        //walk - right
         this.load.path = './assets/'
-        this.load.spritesheet('angelWalk', 'sprites/walk.png', {
+        this.load.spritesheet('angelWalk-right', 'sprites/walk-right.png', {
+            frameWidth: 57,
+            frameHeight: 57,
+        })
+        //walk - left
+        this.load.path = './assets/'
+        this.load.spritesheet('angelWalk-left', 'sprites/walk-left.png', {
             frameWidth: 57,
             frameHeight: 57,
         })
@@ -74,9 +80,15 @@ class Load extends Phaser.Scene {
             frameWidth: 60,
             frameHeight: 58,
         })
-        //walk
+        //walk (right)
         this.load.path = './assets/'
-        this.load.spritesheet('fangWalk', 'sprites/walkBF.png', {
+        this.load.spritesheet('fangWalk-right', 'sprites/walkBF-right.png', {
+            frameWidth: 69,
+            frameHeight: 63,
+        })
+        //walk (left)
+        this.load.path = './assets/'
+        this.load.spritesheet('fangWalk-left', 'sprites/walkBF-left.png', {
             frameWidth: 69,
             frameHeight: 63,
         })
@@ -136,6 +148,20 @@ class Load extends Phaser.Scene {
             repeat: -1,
             frames: this.anims.generateFrameNumbers('angelWalk', { start: 0, end: 5 }),
         })
+        //angel animations (walk - right)
+        this.anims.create({
+            key: 'angel-walk-right',
+            frameRate: 5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('angelWalk-right', { start: 0, end: 5 }),
+        })
+        //angel animations (walk - left)
+        this.anims.create({
+            key: 'angel-walk-left',
+            frameRate: 5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('angelWalk-left', { start: 0, end: 5 }),
+        })
 
         // angel animations (block)
         this.anims.create({
@@ -175,7 +201,14 @@ class Load extends Phaser.Scene {
             key: 'fang-walk-left',
             frameRate: 5,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers('fangWalk', { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers('fangWalk-left', { start: 0, end: 3 }),
+        })
+         //fang animations (walk - right)
+         this.anims.create({
+            key: 'fang-walk-right',
+            frameRate: 5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('fangWalk-right', { start: 0, end: 3 }),
         })
 
         // fang animations (block)
