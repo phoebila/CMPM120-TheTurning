@@ -19,6 +19,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         this.blockCoolDown = 300 // blocking cooldown
         this.health = 100 //total health
         this.immune = false //hurt and can't be hit again
+        this.attacking = false; // one punch
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.angelFSM = new StateMachine('idle', {
@@ -128,7 +129,9 @@ class AttackState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
         angel.anims.play(`angel-punch`)
+        angel.attacking = true
         angel.once('animationcomplete', () => {
+            angel.attacking = false
             this.stateMachine.transition('idle')
         })
         //if collision -> lower health points, update health bar (go to hurt state)
@@ -186,10 +189,11 @@ class BlockState extends State {
 
         // play block anims
         angel.anims.play(`angel-block`) //testing
+        angel.immune = true //angel has blocked
 
         // set a short cooldown delay before going back to idle
         scene.time.delayedCall(angel.blockCoolDown, () => {
-            angel.clearTint()
+            angel.immune = false //angel is no longer blocking
             this.stateMachine.transition('idle')
         })
 

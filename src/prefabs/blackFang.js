@@ -18,6 +18,8 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
         this.blockCoolDown = 300 // blocking cooldown
         this.health = 100 //total health
         this.immune = false //hurt and can't be hit again
+        this.attacking = false; // one punch
+
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.fangFSM = new StateMachine('idle', {
@@ -128,9 +130,12 @@ class AttackStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
         fang.anims.play(`fang-punch`)
+        fang.attacking = true;
         fang.once('animationcomplete', () => {
+            fang.attacking = false;
             this.stateMachine.transition('idle')
         })
+
 
         //if collision -> lower health points, update health bar (go to hurt state)
         var soundGen = Phaser.Math.Between(1, 4)
@@ -187,10 +192,11 @@ class BlockStateFang extends State {
 
         // play block anims
         fang.anims.play(`fang-block`) //testing
+        fang.immune = true //fang is blocking
 
         // set a short cooldown delay before going back to idle
         scene.time.delayedCall(fang.blockCoolDown, () => {
-            fang.clearTint()
+            fang.immune = false //fang is no longer blocking
             this.stateMachine.transition('idle')
         })
 

@@ -105,6 +105,8 @@ class Play extends Phaser.Scene {
         if (!this.gameOver){
             this.angelFSM.step()
             this.fangFSM.step()
+
+            // check if fang or angel is attacking --> create new 'fist', if collision -> deplete health (need to check for blocking)
         }
         //debugging 
         else { 
