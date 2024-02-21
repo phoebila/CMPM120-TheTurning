@@ -100,6 +100,8 @@ class Play extends Phaser.Scene {
     
     update() {
         // make sure we step (ie update) the hero's state machine
+
+        // thank you Katrina for the code related to the ending sequence !!!
         if (!this.gameOver){
             this.angelFSM.step()
             this.fangFSM.step()
