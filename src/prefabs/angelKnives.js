@@ -5,7 +5,8 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this)           // add Hero to existing scene
         scene.physics.add.existing(this)   // add physics body to scene
 
-        this.body.setSize(this.width / 2, this.height / 2)
+        this.body.setSize(this.width / 2, this.height* 1.5)
+        this.body.setOffset(20, 15)
         // look at big bodies examples for fist collider physics
         // in punch state change offset of fist collider object (look at net example)
         this.body.setCollideWorldBounds(true)

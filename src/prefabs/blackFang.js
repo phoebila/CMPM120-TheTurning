@@ -5,7 +5,9 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this)           // add Hero to existing scene
         scene.physics.add.existing(this)   // add physics body to scene
 
-        this.body.setSize(this.width / 2, this.height / 2)
+        // this.body.setSize(this.width / 2, this.height / 2)
+        this.body.setSize(this.width / 2, this.height* 1.5)
+        this.body.setOffset(20, 15)
         this.body.setCollideWorldBounds(true)
         this.body.gravity.y = 500
 
