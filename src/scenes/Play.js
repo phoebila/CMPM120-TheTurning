@@ -10,7 +10,7 @@ class Play extends Phaser.Scene {
         this.music.play();
 
         // add fight text
-        let fightConfig = {
+        this.fightConfig = {
             fontFamily: 'pixel',
             fontSize: '48px',
             color: '#fff914',
@@ -21,7 +21,20 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 0
         }  
-        this.fightText = this.add.text(game.config.width/2.5, game.config.height/3, 'fight', fightConfig)
+
+        this.gameOverConfig = {
+            fontFamily: 'pixel',
+            fontSize: '32px',
+            color: '#fff914',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 0
+        }  
+
+        this.fightText = this.add.text(game.config.width/2.5, game.config.height/3, 'fight', this.fightConfig)
         this.fightText.setDepth(12)
         this.tweens.add({
             targets: this.fightText,
@@ -34,7 +47,6 @@ class Play extends Phaser.Scene {
         });
 
         // add background images
-
         //arcade bg
         const arcadeOutline = this.add.image(0,0, 'outline', 0).setOrigin(0,0).setScale(.75)
         const lighting = this.add.image(0,0, 'lighting', 0).setOrigin(0,0).setScale(.75)
@@ -57,6 +69,7 @@ class Play extends Phaser.Scene {
         this.keys = this.input.keyboard.createCursorKeys()
         this.keys.HKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H) //hurt
         this.keys.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER) //enter
+        this.keys.VKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V) // v --> restart
 
         // setup keybinds input PLAYER 2 -----------------------------------------------
         this.keys.AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A) //left
@@ -79,8 +92,57 @@ class Play extends Phaser.Scene {
         fangHealth = this.makeBar(520,50,0xfff914).setScale(.5)
         this.setValue(fangHealth,100);
 
+        //game ender variables
+        this.gameOver = false
+        this.endingTween = false
+
+    }
+    
+    update() {
+        // make sure we step (ie update) the hero's state machine
+        if (!this.gameOver){
+            this.angelFSM.step()
+            this.fangFSM.step()
+        }
+        //debugging 
+        else { 
+            if (!this.endingTween){ //either blackfang or angel knives wins
+                this.endTextstart();
+                this.music.stop()
+                this.sound.play('death')
+                // this.scene.start('titleScene')
+            }
+
+            if(Phaser.Input.Keyboard.JustDown(this.keys.VKey)) {
+                this.scene.restart();
+            }
+
+            //restarting game
+            this.time.delayedCall(10000, () => {
+                this.scene.start("titleScene");
+            })
+        }
     }
 
+    // OTHER FUNCTIONS -----------------------------------------
+    // tweens for game over text
+    endTextstart() {
+        let over = this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'GAME OVER', this.gameOverConfig).setOrigin(0.5,0.5);
+        let instruct = this.add.text(game.config.width/2, game.config.height/4 - borderUISize - borderPadding, 'Press V to play again', this.gameOverConfig).setOrigin(0.5,0.5);
+
+        var flash = this.tweens.add({
+            targets: [over, instruct],
+            duration: 800,
+            ease: 'Linear',
+            repeat: -1,
+            yoyo: true,
+            scaleX: 1.1,
+            scaleY: 1.1,
+            alpha: 1,
+        });
+
+        this.endingTween = true;
+    }
     //creation of health bar
     makeBar(x, y,color) {
         //draw the bar
@@ -98,19 +160,6 @@ class Play extends Phaser.Scene {
 
         //return the bar
         return bar;
-    }
-    
-    update() {
-        // make sure we step (ie update) the hero's state machine
-        this.angelFSM.step()
-        this.fangFSM.step()
-
-        //debugging 
-        if (Phaser.Input.Keyboard.JustDown(this.keys.up)){ //either blackfang or angel knives wins
-            this.music.stop()
-            this.sound.play('death')
-            this.scene.start('titleScene')
-        }
     }
 
     // update health bar

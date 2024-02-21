@@ -16,6 +16,8 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
         this.fangVelocity = 100    // in pixels
         this.hurtTimer = 200       // in ms
         this.blockCoolDown = 300 // blocking cooldown
+        this.health = 100 //total health
+        this.immune = false //hurt and can't be hit again
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.fangFSM = new StateMachine('idle', {
@@ -154,7 +156,7 @@ class HurtStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
         fang.anims.play(`fang-hurt`)
-        scene.sound.play('hurtAngel')
+        scene.sound.play('hurtFang')
         fang.anims.stop()
         fang.setTint(0xFF0000)     // turn red
         // create knockback by sending body in direction opposite facing direction
@@ -167,9 +169,12 @@ class HurtStateFang extends State {
                 break
         }
 
+        fang.immune = true //fang is hit
+
         // set recovery timer
         scene.time.delayedCall(fang.hurtTimer, () => {
             fang.clearTint()
+            fang.immune = false; //fang can be hit again
             this.stateMachine.transition('idle')
         })
     }

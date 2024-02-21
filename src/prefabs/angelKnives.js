@@ -17,6 +17,8 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         this.angelVelocity = 100    // in pixels
         this.hurtTimer = 200       // in ms
         this.blockCoolDown = 300 // blocking cooldown
+        this.health = 100 //total health
+        this.immune = false //hurt and can't be hit again
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.angelFSM = new StateMachine('idle', {
@@ -166,9 +168,12 @@ class HurtState extends State {
                 break
         }
 
+        angel.immune = true //angel is hit
+
         // set recovery timer
         scene.time.delayedCall(angel.hurtTimer, () => {
             angel.clearTint()
+            angel.immune = false; //angel can be hit again
             this.stateMachine.transition('idle')
         })
     }
