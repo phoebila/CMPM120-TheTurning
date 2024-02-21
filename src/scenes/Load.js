@@ -18,80 +18,19 @@ class Load extends Phaser.Scene {
         });
 
         // Angel Knives Sprites
-        //idle
         this.load.path = './assets/'
-        this.load.spritesheet('angelIdle', 'sprites/idle.png', {
-            frameWidth: 55,
-            frameHeight: 52,
-        })
-        //block
-        this.load.path = './assets/'
-        this.load.spritesheet('angelBlock', 'sprites/block.png', {
-            frameWidth: 73,
-            frameHeight: 58,
-        })
-        //hurt
-        this.load.path = './assets/'
-        this.load.spritesheet('angelHurt', 'sprites/hurt.png', {
-            frameWidth: 53,
-            frameHeight: 49,
-        })
-        //punch
-        this.load.path = './assets/'
-        this.load.spritesheet('angelPunch', 'sprites/punch.png', {
-            frameWidth: 71,
-            frameHeight: 54,
-        })
-        //walk - right
-        this.load.path = './assets/'
-        this.load.spritesheet('angelWalk-right', 'sprites/walk-right.png', {
-            frameWidth: 57,
-            frameHeight: 57,
-        })
-        //walk - left
-        this.load.path = './assets/'
-        this.load.spritesheet('angelWalk-left', 'sprites/walk-left.png', {
-            frameWidth: 57,
-            frameHeight: 57,
+        this.load.spritesheet('angelKnives', 'sprites/angelKnivesSpriteSheet.png', {
+            frameWidth: 64,
+            frameHeight: 64,
         })
 
         // Black Fang Sprites
-        //idle
         this.load.path = './assets/'
-        this.load.spritesheet('fangIdle', 'sprites/idleBF.png', {
-            frameWidth: 67,
-            frameHeight: 57,
+        this.load.spritesheet('blackFang', 'sprites/blackFangSpriteSheet.png', {
+            frameWidth: 64,
+            frameHeight: 64,
         })
-        //block
-        this.load.path = './assets/'
-        this.load.spritesheet('fangBlock', 'sprites/blockBF.png', {
-            frameWidth: 57,
-            frameHeight: 56,
-        })
-        //hurt
-        this.load.path = './assets/'
-        this.load.spritesheet('fangHurt', 'sprites/hurtBF.png', {
-            frameWidth: 58,
-            frameHeight: 54,
-        })
-        //punch
-        this.load.path = './assets/'
-        this.load.spritesheet('fangPunch', 'sprites/punchBF.png', {
-            frameWidth: 60,
-            frameHeight: 58,
-        })
-        //walk (right)
-        this.load.path = './assets/'
-        this.load.spritesheet('fangWalk-right', 'sprites/walkBF-right.png', {
-            frameWidth: 69,
-            frameHeight: 63,
-        })
-        //walk (left)
-        this.load.path = './assets/'
-        this.load.spritesheet('fangWalk-left', 'sprites/walkBF-left.png', {
-            frameWidth: 69,
-            frameHeight: 63,
-        })
+        
 
         //main menu background: from kvanarsd on github! https://github.com/kvanarsd/Fight-Fighters/tree/main
         this.load.image('outline', 'sprites/Outline.png')
@@ -137,30 +76,16 @@ class Load extends Phaser.Scene {
             key: 'angel-idle',
             frameRate: 5,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers('angelIdle', { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers('angelKnives', { start: 0, end: 3 }),
             yoyo: true
         })
 
-        //angel animations (walk - right)
+        //angel animations (hurt)
         this.anims.create({
-            key: 'angel-walk-right',
+            key: 'angel-hurt',
             frameRate: 5,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('angelWalk', { start: 0, end: 5 }),
-        })
-        //angel animations (walk - right)
-        this.anims.create({
-            key: 'angel-walk-right',
-            frameRate: 5,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('angelWalk-right', { start: 0, end: 5 }),
-        })
-        //angel animations (walk - left)
-        this.anims.create({
-            key: 'angel-walk-left',
-            frameRate: 5,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('angelWalk-left', { start: 0, end: 5 }),
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('angelKnives', { start: 4, end: 5 }),
         })
 
         // angel animations (block)
@@ -168,7 +93,7 @@ class Load extends Phaser.Scene {
             key: 'angel-block',
             frameRate: 5,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('angelBlock', { start: 0, end: 2 }),
+            frames: this.anims.generateFrameNumbers('angelKnives', { start: 6, end: 8 }),
         })
 
         //angel animations (punch)
@@ -176,15 +101,22 @@ class Load extends Phaser.Scene {
             key: 'angel-punch',
             frameRate: 5,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('angelPunch', { start: 0, end: 2 }),
+            frames: this.anims.generateFrameNumbers('angelKnives', { start: 9, end: 11 }),
+        })
+        //angel animations (walk - left)
+        this.anims.create({
+            key: 'angel-walk-left',
+            frameRate: 5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('angelKnives', { start: 12, end: 17 }),
         })
 
-         //angel animations (hurt)
-         this.anims.create({
-            key: 'angel-hurt',
+        //angel animations (walk - right)
+        this.anims.create({
+            key: 'angel-walk-right',
             frameRate: 5,
-            repeat: 0,
-            frames: this.anims.generateFrameNumbers('angelHurt', { start: 0, end: 1 }),
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('angelKnives', { start: 18, end: 23 }),
         })
 
         // fang animations (idle) ------------------------------------------------------------
@@ -192,23 +124,8 @@ class Load extends Phaser.Scene {
             key: 'fang-idle',
             frameRate: 5,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers('fangIdle', { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers('blackFang', { start: 0, end: 3 }),
             yoyo: true
-        })
-
-        //fang animations (walk - left)
-        this.anims.create({
-            key: 'fang-walk-left',
-            frameRate: 5,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('fangWalk-left', { start: 0, end: 3 }),
-        })
-         //fang animations (walk - right)
-         this.anims.create({
-            key: 'fang-walk-right',
-            frameRate: 5,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('fangWalk-right', { start: 0, end: 3 }),
         })
 
         // fang animations (block)
@@ -216,23 +133,37 @@ class Load extends Phaser.Scene {
             key: 'fang-block',
             frameRate: 5,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('fangBlock', { start: 0, end: 2 }),
+            frames: this.anims.generateFrameNumbers('blackFang', { start: 4, end: 6 }),
         })
 
+        //fang animations (hurt)
+        this.anims.create({
+            key: 'fang-hurt',
+            frameRate: 5,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('blackFang', { start: 7, end: 10 }),
+        })
         //fang animations (punch)
         this.anims.create({
             key: 'fang-punch',
             frameRate: 5,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('fangPunch', { start: 0, end: 2 }),
+            frames: this.anims.generateFrameNumbers('blackFang', { start: 11, end: 13 }),
         })
 
-         //fang animations (hurt)
-         this.anims.create({
-            key: 'fang-hurt',
+        //fang animations (walk - left)
+        this.anims.create({
+            key: 'fang-walk-left',
             frameRate: 5,
-            repeat: 0,
-            frames: this.anims.generateFrameNumbers('fangHurt', { start: 0, end: 3 }),
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('blackFang', { start: 14, end: 17 }),
+        })
+         //fang animations (walk - right)
+         this.anims.create({
+            key: 'fang-walk-right',
+            frameRate: 5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('blackFang', { start: 18, end: 21 }),
         })
 
         // proceed once loading completes
