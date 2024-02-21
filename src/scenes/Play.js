@@ -47,10 +47,11 @@ class Play extends Phaser.Scene {
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
         this.angelKnives = new AngelKnives(this, 580, 200, 'hero', 0, 'left').setScale(3)
-        this.add.image(110, 60, 'angelHeadshot').setScale(1.5)
+        this.add.image(110, 55, 'angelHeadshot').setScale(1.5)
 
         //adding Blackfang
         this.blackFang = new BlackFang(this, 145, 200, 'hero', 0, 'right').setScale(3)
+        this.add.image(645, 55, 'fangHeadshot').setScale(2)
 
         // setup keyboard input PLAYER 1 -----------------------------------------------
         this.keys = this.input.keyboard.createCursorKeys()
