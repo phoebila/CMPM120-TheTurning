@@ -33,7 +33,7 @@ class IdleStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
         fang.anims.play(`fang-idle`)
-        fang.anims.stop()
+        // fang.anims.stop()
     }
 
     execute(scene, fang) {
@@ -131,6 +131,22 @@ class AttackStateFang extends State {
         })
 
         //if collision -> lower health points, update health bar (go to hurt state)
+        var soundGen = Phaser.Math.Between(1, 4)
+            if (soundGen == 1){
+                scene.sound.play('punch1', {volume: 1})
+            }
+            if (soundGen == 2){
+                scene.sound.play('punch2', {volume: 1})
+            }
+            if (soundGen == 3){
+                scene.sound.play('punch3', {volume: 1})
+            }
+            if (soundGen == 4){
+                scene.sound.play('punch4', {volume: 1})
+            }
+            if (soundGen == 5){
+                scene.sound.play('punch5', {volume: 1})
+            }
     }
 }
 
@@ -138,6 +154,7 @@ class HurtStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
         fang.anims.play(`fang-hurt`)
+        scene.sound.play('hurtAngel')
         fang.anims.stop()
         fang.setTint(0xFF0000)     // turn red
         // create knockback by sending body in direction opposite facing direction
@@ -161,8 +178,9 @@ class HurtStateFang extends State {
 class BlockStateFang extends State {
     enter(scene, fang){
         fang.setVelocity(0)
-        // play block anims
+        scene.sound.play('block') 
 
+        // play block anims
         fang.anims.play(`fang-block`) //testing
 
         // set a short cooldown delay before going back to idle

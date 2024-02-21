@@ -34,7 +34,7 @@ class IdleState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
         angel.anims.play(`angel-idle`)
-        angel.anims.stop()
+        // angel.anims.stop()
     }
 
     execute(scene, angel) {
@@ -130,13 +130,30 @@ class AttackState extends State {
             this.stateMachine.transition('idle')
         })
         //if collision -> lower health points, update health bar (go to hurt state)
+        var soundGen = Phaser.Math.Between(1, 4)
+            if (soundGen == 1){
+                scene.sound.play('punch1', {volume: 1})
+            }
+            if (soundGen == 2){
+                scene.sound.play('punch2', {volume: 1})
+            }
+            if (soundGen == 3){
+                scene.sound.play('punch3', {volume: 1})
+            }
+            if (soundGen == 4){
+                scene.sound.play('punch4', {volume: 1})
+            }
+            if (soundGen == 5){
+                scene.sound.play('punch5', {volume: 1})
+            }
+        }
     }
-}
 
 class HurtState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
         angel.anims.play(`angel-hurt`)
+        scene.sound.play('hurtFang')
         angel.anims.stop()
         angel.setTint(0xFF0000)     // turn red
         // create knockback by sending body in direction opposite facing direction
@@ -160,6 +177,7 @@ class HurtState extends State {
 class BlockState extends State {
     enter(scene, angel){
         angel.setVelocity(0)
+        scene.sound.play('block') 
 
         // play block anims
         angel.anims.play(`angel-block`) //testing

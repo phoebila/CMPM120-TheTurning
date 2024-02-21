@@ -80,6 +80,8 @@ class Play extends Phaser.Scene {
         this.setValue(fangHealth,100);
 
     }
+
+    //creation of health bar
     makeBar(x, y,color) {
         //draw the bar
         let bar = this.add.graphics();
@@ -97,11 +99,7 @@ class Play extends Phaser.Scene {
         //return the bar
         return bar;
     }
-    setValue(bar,percentage) {
-        //scale the bar
-        bar.scaleX = percentage/100;
-    }
-
+    
     update() {
         // make sure we step (ie update) the hero's state machine
         this.angelFSM.step()
@@ -110,31 +108,15 @@ class Play extends Phaser.Scene {
         //debugging 
         if (Phaser.Input.Keyboard.JustDown(this.keys.up)){ //either blackfang or angel knives wins
             this.music.stop()
+            this.sound.play('death')
             this.scene.start('titleScene')
         }
-
-        if(Phaser.Input.Keyboard.JustDown(this.keys.enter) || Phaser.Input.Keyboard.JustDown(this.keys.FKey)) { //punch audio
-            var soundGen = Phaser.Math.Between(1, 4)
-            if (soundGen == 1){
-                this.sound.play('punch1', {volume: 1})
-            }
-            if (soundGen == 2){
-                this.sound.play('punch2', {volume: 1})
-            }
-            if (soundGen == 3){
-                this.sound.play('punch3', {volume: 1})
-            }
-            if (soundGen == 4){
-                this.sound.play('punch4', {volume: 1})
-            }
-            if (soundGen == 5){
-                this.sound.play('punch5', {volume: 1})
-            }
-        }
-
-        if(Phaser.Input.Keyboard.JustDown(this.keys.RKey) || Phaser.Input.Keyboard.JustDown(this.keys.shift)) { //block audio
-            this.sound.play('block') 
-        }
-        
     }
+
+    // update health bar
+    setValue(bar,percentage) {
+        //scale the bar
+        bar.scaleX = percentage/100;
+    }
+
 }
