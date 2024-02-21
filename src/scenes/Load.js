@@ -132,7 +132,7 @@ class Load extends Phaser.Scene {
     }
 
     create() {
-        // angel animations (idle)
+        // angel animations (idle) ------------------------------------------------------------
         this.anims.create({
             key: 'angel-idle',
             frameRate: 5,
@@ -187,7 +187,7 @@ class Load extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('angelHurt', { start: 0, end: 1 }),
         })
 
-        // fang animations (idle)
+        // fang animations (idle) ------------------------------------------------------------
         this.anims.create({
             key: 'fang-idle',
             frameRate: 5,

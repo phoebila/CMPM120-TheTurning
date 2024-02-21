@@ -6,6 +6,8 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this)   // add physics body to scene
 
         this.body.setSize(this.width / 2, this.height / 2)
+        // look at big bodies examples for fist collider physics
+        // in punch state change offset of fist collider object (look at net example)
         this.body.setCollideWorldBounds(true)
         this.body.gravity.y = 500
 
@@ -30,7 +32,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
 class IdleState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
-        angel.anims.play(`angelIdle`)
+        angel.anims.play(`angel-idle`)
         angel.anims.stop()
     }
 
@@ -115,14 +117,14 @@ class MoveState extends State {
         // normalize movement vector, update angel position, and play proper animation
         moveDirection.normalize()
         angel.setVelocity(angel.angelVelocity * moveDirection.x, angel.angelVelocity * moveDirection.y)
-        angel.anims.play(`angelWalk-${angel.direction}`, true)
+        angel.anims.play(`angel-walk-${angel.direction}`, true)
     }
 }
 
 class AttackState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
-        angel.anims.play(`angelPunch`)
+        angel.anims.play(`angel-punch`)
         angel.once('animationcomplete', () => {
             this.stateMachine.transition('idle')
         })
@@ -133,7 +135,7 @@ class AttackState extends State {
 class HurtState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
-        angel.anims.play(`angelHurt`)
+        angel.anims.play(`angel-hurt`)
         angel.anims.stop()
         angel.setTint(0xFF0000)     // turn red
         // create knockback by sending body in direction opposite facing direction
@@ -159,7 +161,7 @@ class BlockState extends State {
         angel.setVelocity(0)
 
         // play block anims
-        angel.anims.play(`angelBlock`) //testing
+        angel.anims.play(`angel-block`) //testing
 
         // set a short cooldown delay before going back to idle
         scene.time.delayedCall(angel.blockCoolDown, () => {
