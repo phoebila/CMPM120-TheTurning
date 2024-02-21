@@ -30,7 +30,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
 class IdleState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
-        angel.anims.play(`walk-${angel.direction}`)
+        angel.anims.play(`angelIdle`)
         angel.anims.stop()
     }
 
@@ -115,14 +115,14 @@ class MoveState extends State {
         // normalize movement vector, update angel position, and play proper animation
         moveDirection.normalize()
         angel.setVelocity(angel.angelVelocity * moveDirection.x, angel.angelVelocity * moveDirection.y)
-        angel.anims.play(`walk-${angel.direction}`, true)
+        angel.anims.play(`angelWalk-${angel.direction}`, true)
     }
 }
 
 class AttackState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
-        angel.anims.play(`swing-${angel.direction}`)
+        angel.anims.play(`angelPunch`)
         angel.once('animationcomplete', () => {
             this.stateMachine.transition('idle')
         })
@@ -133,7 +133,7 @@ class AttackState extends State {
 class HurtState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
-        angel.anims.play(`walk-${angel.direction}`)
+        angel.anims.play(`angelHurt`)
         angel.anims.stop()
         angel.setTint(0xFF0000)     // turn red
         // create knockback by sending body in direction opposite facing direction
@@ -157,9 +157,9 @@ class HurtState extends State {
 class BlockState extends State {
     enter(scene, angel){
         angel.setVelocity(0)
-        // play block anims
 
-        angel.anims.play(`swing-${angel.direction}`) //testing
+        // play block anims
+        angel.anims.play(`angelBlock`) //testing
 
         // set a short cooldown delay before going back to idle
         scene.time.delayedCall(angel.blockCoolDown, () => {

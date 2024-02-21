@@ -30,7 +30,7 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
 class IdleStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
-        fang.anims.play(`walk-${fang.direction}`)
+        fang.anims.play(`fangIdle`)
         fang.anims.stop()
     }
 
@@ -116,14 +116,14 @@ class MoveStateFang extends State {
         // normalize movement vector, update fang position, and play proper animation
         moveDirection.normalize()
         fang.setVelocity(fang.fangVelocity * moveDirection.x, fang.fangVelocity * moveDirection.y)
-        fang.anims.play(`walk-${fang.direction}`, true)
+        fang.anims.play(`fangWalk-${fang.direction}`, true)
     }
 }
 
 class AttackStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
-        fang.anims.play(`swing-${fang.direction}`)
+        fang.anims.play(`fangPunch`)
         fang.once('animationcomplete', () => {
             this.stateMachine.transition('idle')
         })
@@ -135,7 +135,7 @@ class AttackStateFang extends State {
 class HurtStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
-        fang.anims.play(`walk-${fang.direction}`)
+        fang.anims.play(`fangHurt`)
         fang.anims.stop()
         fang.setTint(0xFF0000)     // turn red
         // create knockback by sending body in direction opposite facing direction
@@ -161,7 +161,7 @@ class BlockStateFang extends State {
         fang.setVelocity(0)
         // play block anims
 
-        fang.anims.play(`swing-${fang.direction}`) //testing
+        fang.anims.play(`fangBlock`) //testing
 
         // set a short cooldown delay before going back to idle
         scene.time.delayedCall(fang.blockCoolDown, () => {
