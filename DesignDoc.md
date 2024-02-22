@@ -5,6 +5,7 @@
         - [] make sure fist moves with characters
         - [] fist is hidden within collision body
         - [] if on impact with body sprite, move char health down by 10 pts
+        - [] if player in 'block' state, fist has no effect on health
     ### Health Bar
         - [] deplete health bar based on collision of fist
         - [] health bar correctly decreases
