@@ -85,13 +85,6 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.blackFang, this.platform)
         this.physics.add.collider(this.angelKnives, this.blackFang)
 
-        // //health bars: https://phasergames.com/how-to-make-a-health-bar-in-phaser-3/
-        // angelHealth = this.makeBar(140,50,0xfff914).setScale(.5)
-        // this.setValue(angelHealth,100);
-
-        // fangHealth = this.makeBar(520,50,0xfff914).setScale(.5)
-        // this.setValue(fangHealth,100);
-
         //game ender variables
         this.gameOver = false
         this.endingTween = false
