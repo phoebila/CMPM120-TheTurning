@@ -69,6 +69,11 @@ class Play extends Phaser.Scene {
         this.angelFist = new Punch(this, 145, 470, this.blackFang)
         this.blackFist = new Punch(this, 580, 470, this.angelKnives)
 
+        //health bars
+        this.angelKnives.healthBar = this.add.image(135,65, "health").setScale(.6).setOrigin(0,0.5);
+        this.blackFang.healthBar = this.add.image(625, 65, "health").setScale(.6).setOrigin(1,0.5);
+
+
         // setup keyboard input PLAYER 1 -----------------------------------------------
         this.keys = this.input.keyboard.createCursorKeys()
         this.keys.HKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H) //hurt

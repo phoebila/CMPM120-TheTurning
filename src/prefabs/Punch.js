@@ -12,14 +12,6 @@ class Punch extends Phaser.Physics.Arcade.Sprite {
         // adding fist to a physics grp
         this.fistGrp = scene.add.group([this.fist])
 
-        //health bars: https://phasergames.com/how-to-make-a-health-bar-in-phaser-3/
-        this.fangHealth = makeBar(520,50,0xfff914, scene).setScale(.5)
-        setValue(this.fangHealth,100);
-
-
-        this.angelHealth = makeBar(140,50,0xfff914, scene).setScale(.5)
-        setValue(this.angelHealth,100);
-
 
         // FIST COLLIDER THINGS<3 WIP --> From Fight Fighters
         this.collider = scene.physics.add.collider(enemy, this.fistGrp, () => {
@@ -32,41 +24,16 @@ class Punch extends Phaser.Physics.Arcade.Sprite {
             if (enemy.health <= 0){ //game over condition
                 enemy.health = 0
                 scene.gameOver = true
+                enemy.healthBar.setScale(0, 1)
             }
             else { //decrease health bar (not dependent of whos fist is it, will take care of either situation) WIP
                 if (enemy.name == "AngelKnives"){
-                    setValue(this.angelHealth, enemy.health);
-                    console.log("being hit");
+                    enemy.healthBar.setScale(enemy.health/1000, 1)
                 }
                 else { //BlackFang health
-                    setValue(this.fangHealth, enemy.health);
+                    enemy.healthBar.setScale(enemy.health/1000, 1)
                 }
             } 
         }, null, scene)
     }
-}
-
-//creation of health bar
-function makeBar(x, y,color, scene) {
-    //draw the bar
-    let bar = scene.add.graphics();
-
-    //color the bar
-    bar.fillStyle(color, 1);
-
-    //fill the bar with a rectangle
-    bar.fillRect(0, 0, 100, 50);
-    
-    //position the bar
-    bar.x = x;
-    bar.y = y;
-
-    //return the bar
-    return bar;
-}
-
-// update health bar
-function setValue(bar,percentage) {
-    //scale the bar
-    bar.scaleX = percentage/100;
 }

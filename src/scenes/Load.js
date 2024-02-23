@@ -47,6 +47,8 @@ class Load extends Phaser.Scene {
         // BlackFang headshot
         this.load.image('fangHeadshot', 'sprites/bfHeadshot.png')
 
+        // health
+        this.load.image('health', 'sprites/health.png')
 
         //background movie
         this.load.video('EllieBG', 'webm/ElliePixelMov.mp4', true);
