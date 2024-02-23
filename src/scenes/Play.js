@@ -66,8 +66,8 @@ class Play extends Phaser.Scene {
         this.add.image(645, 55, 'fangHeadshot').setScale(2)
 
         //fists 
-        this.angelFist = new Punch(this, 145, 300, this.blackFang)
-        this.blackFist = new Punch(this, 580, 300, this.angelKnives)
+        this.angelFist = new Punch(this, 145, 470, this.blackFang)
+        this.blackFist = new Punch(this, 580, 470, this.angelKnives)
 
         // setup keyboard input PLAYER 1 -----------------------------------------------
         this.keys = this.input.keyboard.createCursorKeys()

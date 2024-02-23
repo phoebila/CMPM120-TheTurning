@@ -203,28 +203,3 @@ class BlockState extends State {
 
     }
 }
-
-//creation of health bar
-function makeBar(x, y,color, scene) {
-    //draw the bar
-    let bar = scene.add.graphics();
-
-    //color the bar
-    bar.fillStyle(color, 1);
-
-    //fill the bar with a rectangle
-    bar.fillRect(0, 0, 100, 50);
-    
-    //position the bar
-    bar.x = x;
-    bar.y = y;
-
-    //return the bar
-    return bar;
-}
-
-// update health bar
-function setValue(bar,percentage) {
-    //scale the bar
-    bar.scaleX = percentage/100;
-}
