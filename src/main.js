@@ -1,6 +1,9 @@
-// Code Practice: Scrolling States
-// Name:
-// Date: 
+// Name: Phoebe Royer
+// Date: 2/23/24
+// Game Name: The Turning
+// Components: physics, fsm, text objs, animations, tweens, different fonts
+// Special: I wanted to give The Turning from the last of us a visual aspect instead of the straight narration. So, I used the arcade assets from Katrina's Fight Fighters
+//          to create the arcade box, like in the game. I also used Katrina's tweens, timers, etc to adapt it to what I needed to portray my vision.
 
 'use strict'
 
@@ -23,6 +26,8 @@ const config = {
         autoCenter: Phaser.Scale.HORIZONTALLY
     },
 }
+
+// THIS GAME WOULDNT BE AS COOL WITHOUT KATRINA VANARSDALES FIGHT FIGHTERS<3 THANK YOU SO MUCH FOR LETTING ME USE ASSETS AND CODE!!!! 
 
 const game = new Phaser.Game(config)
 
