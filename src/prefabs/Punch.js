@@ -16,8 +16,10 @@ class Punch extends Phaser.Physics.Arcade.Sprite {
         this.fangHealth = makeBar(520,50,0xfff914, scene).setScale(.5)
         setValue(this.fangHealth,100);
 
+
         this.angelHealth = makeBar(140,50,0xfff914, scene).setScale(.5)
         setValue(this.angelHealth,100);
+
 
         // FIST COLLIDER THINGS<3 WIP --> From Fight Fighters
         this.collider = scene.physics.add.collider(enemy, this.fistGrp, () => {
@@ -25,7 +27,7 @@ class Punch extends Phaser.Physics.Arcade.Sprite {
                 enemy.hurt = true
             }
 
-            enemy.health -= 10
+            enemy.health -= 5
 
             if (enemy.health <= 0){ //game over condition
                 enemy.health = 0
@@ -34,7 +36,7 @@ class Punch extends Phaser.Physics.Arcade.Sprite {
             else { //decrease health bar (not dependent of whos fist is it, will take care of either situation) WIP
                 if (enemy.name == "AngelKnives"){
                     setValue(this.angelHealth, enemy.health);
-                    // console.log("being hit");
+                    console.log("being hit");
                 }
                 else { //BlackFang health
                     setValue(this.fangHealth, enemy.health);
