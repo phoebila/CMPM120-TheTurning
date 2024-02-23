@@ -12,6 +12,8 @@ class Punch extends Phaser.Physics.Arcade.Sprite {
         // adding fist to a physics grp
         this.fistGrp = scene.add.group([this.fist])
 
+        //now how to move fist with body and on anims
+
 
         // FIST COLLIDER THINGS<3 WIP --> From Fight Fighters
         this.collider = scene.physics.add.collider(enemy, this.fistGrp, () => {
