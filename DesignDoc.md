@@ -10,4 +10,7 @@
         - [] deplete health bar based on collision of fist
         - [] health bar correctly decreases
         - [] if player health is 0 -> game over is true
+    ### Stretch 
+        - [] add Riley's narration based on random fight prompt
+        - [] fix lag issues
 
