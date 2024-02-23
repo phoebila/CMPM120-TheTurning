@@ -108,7 +108,7 @@ class Title extends Phaser.Scene{
             // this.scene.start('playScene')
             // credits menu
             if(this.num == 1) {
-                this.sound.play('menuSelect', {volume: .3})
+                this.sound.play('menuSelect', {volume: .1})
                 // tween away menu 1 and tween in menu 2
                 var menu1away = this.tweens.add({
                     targets: [this.flasingTitle, this.startGame],
@@ -148,7 +148,7 @@ class Title extends Phaser.Scene{
 
             // menu 3
             if(this.num == 2) {
-                this.sound.play('menuSelect', {volume: .3})
+                this.sound.play('menuSelect', {volume: .1})
                 // slide away text and in menu 3 text
                 var menu2away = this.tweens.add({
                     targets: [this.tempBG],

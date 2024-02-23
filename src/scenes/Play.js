@@ -113,7 +113,7 @@ class Play extends Phaser.Scene {
             if (!this.endingTween){ //either blackfang or angel knives wins
                 this.endTextstart();
                 this.music.stop()
-                this.sound.play('death')
+                this.sound.play('death', {volume: 1})
                 // this.scene.start('titleScene')
             }
 
