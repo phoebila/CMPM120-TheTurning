@@ -21,6 +21,16 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         this.immune = false //hurt and can't be hit again
         this.attacking = false; // one punch
 
+        // Fist physics
+        this.fist = scene.physics.add.sprite(245, 470).setScale(3)
+        this.fist.body.setCircle(6)
+        this.fist.body.setAngularVelocity(-20)
+        this.fist.body.setImmovable(true)
+        this.fist.body.onCollide = true
+        // adding fist to a physics grp
+        this.fistGrp = scene.add.group([this.fist])
+        // now how to add it to move with body and punching?
+
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.angelFSM = new StateMachine('idle', {
             idle: new IdleState(),

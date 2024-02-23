@@ -43,6 +43,7 @@ class Load extends Phaser.Scene {
 
         //Angel Kives headshot
         this.load.image('angelHeadshot', 'sprites/AngelHeadshot.png')
+
         // BlackFang headshot
         this.load.image('fangHeadshot', 'sprites/bfHeadshot.png')
 
