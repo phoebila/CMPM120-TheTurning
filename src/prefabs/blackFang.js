@@ -21,10 +21,9 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
         this.attacking = false; // one punch
         this.hurt = false;
 
-        //health bar
-        this.fangHealth = makeBar(520,50,0xfff914, scene).setScale(.5)
-        setValue(this.fangHealth,100);
-
+        //health bar  --> switching these healthbars to easier decrease health inside this prefab
+        this.angelHealth = makeBar(140,50,0xfff914, scene).setScale(.5)
+        setValue(this.angelHealth,100);
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.fangFSM = new StateMachine('idle', {

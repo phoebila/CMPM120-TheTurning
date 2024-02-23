@@ -22,10 +22,10 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         this.attacking = false; // one punch
         this.hurt = false;
 
-        //health bar
+        //health bar --> switching these healthbars to easier decrease health inside this prefab
         //health bars: https://phasergames.com/how-to-make-a-health-bar-in-phaser-3/
-        this.angelHealth = makeBar(140,50,0xfff914, scene).setScale(.5)
-        setValue(this.angelHealth,100);
+        this.fangHealth = makeBar(520,50,0xfff914, scene).setScale(.5)
+        setValue(this.fangHealth,100);
 
         // Fist physics
         this.fist = scene.physics.add.sprite(245, 470).setScale(3)
@@ -50,8 +50,8 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         //         scene.gameOver = true
         //     }
         //     else { //decrease health bar
-        //         setValue(enemy.health,enemy.health-10);
-        //     }
+        //         setValue(this.fangHealth, enemy.health);
+        //     } 
         // }, null, scene)
 
         // initialize state machine managing hero (initial state, possible states, state args[])
