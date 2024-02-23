@@ -1,6 +1,6 @@
 // angelKnives prefab
 class AngelKnives extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, frame, direction, enemy) {
+    constructor(scene, x, y, texture, frame, direction) {
         super(scene, x, y, texture, frame) // call Sprite parent class
         scene.add.existing(this)           // add Hero to existing scene
         scene.physics.add.existing(this)   // add physics body to scene
@@ -21,38 +21,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         this.immune = false //hurt and can't be hit again
         this.attacking = false; // one punch
         this.hurt = false;
-
-        //health bar --> switching these healthbars to easier decrease health inside this prefab
-        //health bars: https://phasergames.com/how-to-make-a-health-bar-in-phaser-3/
-        this.fangHealth = makeBar(520,50,0xfff914, scene).setScale(.5)
-        setValue(this.fangHealth,100);
-
-        // Fist physics
-        this.fist = scene.physics.add.sprite(245, 470).setScale(3)
-        this.fist.body.setCircle(6)
-        this.fist.body.setAngularVelocity(-20)
-        this.fist.body.setImmovable(true)
-        this.fist.body.onCollide = true
-        // adding fist to a physics grp
-        this.fistGrp = scene.add.group([this.fist])
-        // now how to add it to move with body and punching?
-
-        // FIST COLLIDER THINGS<3
-        // this.collider = scene.physics.add.collider(enemy, this.fistGrp, () => {
-        //     if (!enemy.immune){
-        //         enemy.hurt = true
-        //     }
-
-        //     enemy.health -= 10
-
-        //     if (enemy.health <= 0){ //game over condition
-        //         enemy.health = 0
-        //         scene.gameOver = true
-        //     }
-        //     else { //decrease health bar
-        //         setValue(this.fangHealth, enemy.health);
-        //     } 
-        // }, null, scene)
+        this.name = "AngelKnives"
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.angelFSM = new StateMachine('idle', {
