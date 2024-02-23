@@ -58,11 +58,11 @@ class Play extends Phaser.Scene {
         this.background.play(true)
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
-        this.angelKnives = new AngelKnives(this, 145, 300, 'hero', 0, 'left').setScale(3)
+        this.angelKnives = new AngelKnives(this, 145, 300, 'hero', 0, 'left', this.blackFang).setScale(3)
         this.add.image(110, 55, 'angelHeadshot').setScale(1.5)
 
         //adding Blackfang
-        this.blackFang = new BlackFang(this, 580, 300, 'hero', 0, 'right').setScale(3)
+        this.blackFang = new BlackFang(this, 580, 300, 'hero', 0, 'right', this.angelKnives).setScale(3)
         this.add.image(645, 55, 'fangHeadshot').setScale(2)
 
         // setup keyboard input PLAYER 1 -----------------------------------------------
@@ -85,12 +85,12 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.blackFang, this.platform)
         this.physics.add.collider(this.angelKnives, this.blackFang)
 
-        //health bars: https://phasergames.com/how-to-make-a-health-bar-in-phaser-3/
-        angelHealth = this.makeBar(140,50,0xfff914).setScale(.5)
-        this.setValue(angelHealth,100);
+        // //health bars: https://phasergames.com/how-to-make-a-health-bar-in-phaser-3/
+        // angelHealth = this.makeBar(140,50,0xfff914).setScale(.5)
+        // this.setValue(angelHealth,100);
 
-        fangHealth = this.makeBar(520,50,0xfff914).setScale(.5)
-        this.setValue(fangHealth,100);
+        // fangHealth = this.makeBar(520,50,0xfff914).setScale(.5)
+        // this.setValue(fangHealth,100);
 
         //game ender variables
         this.gameOver = false
@@ -147,29 +147,6 @@ class Play extends Phaser.Scene {
 
         this.endingTween = true;
     }
-    //creation of health bar
-    makeBar(x, y,color) {
-        //draw the bar
-        let bar = this.add.graphics();
-
-        //color the bar
-        bar.fillStyle(color, 1);
-
-        //fill the bar with a rectangle
-        bar.fillRect(0, 0, 100, 50);
-        
-        //position the bar
-        bar.x = x;
-        bar.y = y;
-
-        //return the bar
-        return bar;
-    }
-
-    // update health bar
-    setValue(bar,percentage) {
-        //scale the bar
-        bar.scaleX = percentage/100;
-    }
+    
 
 }

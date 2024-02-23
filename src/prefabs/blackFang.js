@@ -1,6 +1,6 @@
 // blackFang prefab
 class BlackFang extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, frame, direction) {
+    constructor(scene, x, y, texture, frame, direction, enemy) {
         super(scene, x, y, texture, frame) // call Sprite parent class
         scene.add.existing(this)           // add Hero to existing scene
         scene.physics.add.existing(this)   // add physics body to scene
@@ -19,6 +19,11 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
         this.health = 100 //total health
         this.immune = false //hurt and can't be hit again
         this.attacking = false; // one punch
+        this.hurt = false;
+
+        //health bar
+        this.fangHealth = makeBar(520,50,0xfff914, scene).setScale(.5)
+        setValue(this.fangHealth,100);
 
 
         // initialize state machine managing hero (initial state, possible states, state args[])
@@ -202,4 +207,29 @@ class BlockStateFang extends State {
 
         // fang.anims.stop()
     }
+}
+
+//creation of health bar
+function makeBar(x, y,color, scene) {
+    //draw the bar
+    let bar = scene.add.graphics();
+
+    //color the bar
+    bar.fillStyle(color, 1);
+
+    //fill the bar with a rectangle
+    bar.fillRect(0, 0, 100, 50);
+    
+    //position the bar
+    bar.x = x;
+    bar.y = y;
+
+    //return the bar
+    return bar;
+}
+
+// update health bar
+function setValue(bar,percentage) {
+    //scale the bar
+    bar.scaleX = percentage/100;
 }
