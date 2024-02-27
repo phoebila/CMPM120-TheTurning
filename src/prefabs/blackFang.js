@@ -169,7 +169,6 @@ class AttackStateFang extends State {
             this.stateMachine.transition('idle')
         })
 
-        //if collision -> lower health points, update health bar (go to hurt state)
         var soundGen = Phaser.Math.Between(1, 4)
             if (soundGen == 1){
                 scene.sound.play('punch1', {volume: 1})
