@@ -21,6 +21,7 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
         this.attacking = false; // one punch
         this.hurt = false;
         this.name = "BlackFang"
+        this.enemy = 
 
         //fist WIP
         this.fist = scene.physics.add.sprite(605, 470).setScale(3)
@@ -146,6 +147,21 @@ class AttackStateFang extends State {
         fang.fist.x -= 60 //moving fist
 
         // implement fist collisions?
+        // FIST COLLIDER THINGS<3 WIP --> From Fight Fighters
+        this.collider = scene.physics.add.collider(fang.enemy, fang.fist, () => {
+            if (!fang.enemy.immune){
+                fang.enemy.hurt = true
+            }
+            fang.enemy.health -= 5
+            if (fang.enemy.health <= 0){ //game over condition
+                fang.enemy.health = 0
+                scene.gameOver = true
+                fang.enemy.healthBar.setScale(0, 1)
+            }
+            else { //decrease health bar
+                fang.enemy.healthBar.setScale(fang.enemy.health/1000, 1)
+            } 
+            }, null, scene)
 
         fang.once('animationcomplete', () => {
             fang.attacking = false;

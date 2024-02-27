@@ -22,6 +22,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         this.attacking = false; // one punch
         this.hurt = false;
         this.name = "AngelKnives"
+        this.enemy = 
 
         //fist WIP
         this.fist = scene.physics.add.sprite(165, 470).setScale(3)
@@ -41,6 +42,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
             hurt: new HurtState(),
         }, [scene, this])   // pass these as arguments to maintain scene/object context in the FSM
     }
+
 }
 
 // hero-specific state classes
@@ -145,10 +147,26 @@ class AttackState extends State {
         angel.fist.x += 80 //moving fist
 
         //implement collisions with enemy?
+        // FIST COLLIDER THINGS<3 WIP --> From Fight Fighters
+        this.collider = scene.physics.add.collider(angel.enemy, angel.fist, () => {
+        if (!angel.enemy.immune){
+            angel.enemy.hurt = true
+        }
+        angel.enemy.health -= 5
+        if (angel.enemy.health <= 0){ //game over condition
+            angel.enemy.health = 0
+            scene.gameOver = true
+            angel.enemy.healthBar.setScale(0, 1)
+        }
+        else { //decrease health bar
+            angel.enemy.healthBar.setScale(angel.enemy.health/1000, 1)
+            // how to stop all health from draining?
+        } 
+        }, null, scene)
 
         angel.once('animationcomplete', () => {
             angel.attacking = false
-            angel.fist.x -= 80 //moving fist
+            angel.fist.x -= 80 //moving fist    
             this.stateMachine.transition('idle')
         })
         //if collision -> lower health points, update health bar (go to hurt state)

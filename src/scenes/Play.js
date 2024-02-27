@@ -73,6 +73,8 @@ class Play extends Phaser.Scene {
         this.angelKnives.healthBar = this.add.image(135,65, "health").setScale(.6).setOrigin(0,0.5);
         this.blackFang.healthBar = this.add.image(625, 65, "health").setScale(.6).setOrigin(1,0.5);
 
+        this.angelKnives.enemy = this.blackFang
+        this.blackFang.enemy = this.angelKnives
 
         // setup keyboard input PLAYER 1 -----------------------------------------------
         this.keys = this.input.keyboard.createCursorKeys()
