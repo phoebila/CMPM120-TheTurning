@@ -22,6 +22,15 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
         this.hurt = false;
         this.name = "BlackFang"
 
+        //fist WIP
+        this.fist = scene.physics.add.sprite(605, 470).setScale(3)
+        this.fist.body.setCircle(5)
+        this.fist.body.onCollide = true
+        this.fist.body.setCollideWorldBounds(true)
+        // adding fist to a physics grp
+        this.fistGrp = scene.physics.add.group([this.fist])
+        //now how to move fist with body and on anims
+
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.fangFSM = new StateMachine('idle', {
             idle: new IdleStateFang(),
@@ -37,6 +46,7 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
 class IdleStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
+        fang.fist.setVelocity(0)
         fang.anims.play(`fang-idle`)
         // fang.anims.stop()
     }
@@ -123,6 +133,7 @@ class MoveStateFang extends State {
         // normalize movement vector, update fang position, and play proper animation
         moveDirection.normalize()
         fang.setVelocity(fang.fangVelocity * moveDirection.x, fang.fangVelocity * moveDirection.y)
+        fang.fist.setVelocity(fang.fangVelocity * moveDirection.x, fang.fangVelocity * moveDirection.y)
         fang.anims.play(`fang-walk-${fang.direction}`, true)
     }
 }
@@ -132,11 +143,15 @@ class AttackStateFang extends State {
         fang.setVelocity(0)
         fang.anims.play(`fang-punch`)
         fang.attacking = true;
+        fang.fist.x -= 60 //moving fist
+
+        // implement fist collisions?
+
         fang.once('animationcomplete', () => {
             fang.attacking = false;
+            fang.fist.x += 60 //moving fist back
             this.stateMachine.transition('idle')
         })
-
 
         //if collision -> lower health points, update health bar (go to hurt state)
         var soundGen = Phaser.Math.Between(1, 4)
@@ -161,6 +176,7 @@ class AttackStateFang extends State {
 class HurtStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
+        fang.fist.setVelocity(0)
         fang.anims.play(`fang-hurt`)
         scene.sound.play('hurtFang')
         fang.anims.stop()

@@ -23,6 +23,15 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         this.hurt = false;
         this.name = "AngelKnives"
 
+        //fist WIP
+        this.fist = scene.physics.add.sprite(165, 470).setScale(3)
+        this.fist.body.setCircle(5)
+        this.fist.body.onCollide = true
+        this.fist.body.setCollideWorldBounds(true)
+        // adding fist to a physics grp
+        this.fistGrp = scene.physics.add.group([this.fist])
+        //now how to move fist with body and on anims
+
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.angelFSM = new StateMachine('idle', {
             idle: new IdleState(),
@@ -38,6 +47,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
 class IdleState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
+        angel.fist.setVelocity(0)
         angel.anims.play(`angel-idle`)
         // angel.anims.stop()
     }
@@ -84,8 +94,6 @@ class MoveState extends State {
         const BKey = scene.keys.BKey
         const EnterKey = scene.keys.enter
 
-
-
         // transition to swing if pressing space
         if(Phaser.Input.Keyboard.JustDown(EnterKey)) {
             this.stateMachine.transition('attack')
@@ -123,6 +131,7 @@ class MoveState extends State {
         // normalize movement vector, update angel position, and play proper animation
         moveDirection.normalize()
         angel.setVelocity(angel.angelVelocity * moveDirection.x, angel.angelVelocity * moveDirection.y)
+        angel.fist.setVelocity(angel.angelVelocity * moveDirection.x, angel.angelVelocity * moveDirection.y)
         angel.anims.play(`angel-walk-${angel.direction}`, true)
     }
 }
@@ -132,8 +141,13 @@ class AttackState extends State {
         angel.setVelocity(0)
         angel.anims.play(`angel-punch`)
         angel.attacking = true
+        angel.fist.x += 80 //moving fist
+
+        //implement collisions with enemy?
+
         angel.once('animationcomplete', () => {
             angel.attacking = false
+            angel.fist.x -= 80 //moving fist
             this.stateMachine.transition('idle')
         })
         //if collision -> lower health points, update health bar (go to hurt state)
@@ -159,17 +173,18 @@ class AttackState extends State {
 class HurtState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
+        angel.fist.setVelocity(0)
         angel.anims.play(`angel-hurt`)
-        scene.sound.play('hurtFang')
+        scene.sound.play('hurtAngel')
         angel.anims.stop()
         angel.setTint(0xFF0000)     // turn red
         // create knockback by sending body in direction opposite facing direction
         switch(angel.direction) {
             case 'left':
-                angel.setVelocityX(angel.angelVelocity*2)
+                angel.setVelocityX(-angel.angelVelocity*2)
                 break
             case 'right':
-                angel.setVelocityX(-angel.angelVelocity*2)
+                angel.setVelocityX(angel.angelVelocity*2)
                 break
         }
 

@@ -1,19 +1,21 @@
 // punch prefab
 class Punch extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, enemy){
-        super(scene, x, y, enemy)
+    constructor(scene, x, y, enemy, player){
+        super(scene, x, y, enemy, player)
 
         // Fist physics
         this.fist = scene.physics.add.sprite(x, y).setScale(3)
         this.fist.body.setCircle(5)
-        this.fist.body.setAngularVelocity(-20)
-        this.fist.body.setImmovable(true)
+        this.fist.body.setAngularVelocity(-100)
         this.fist.body.onCollide = true
+        this.fist.body.setCollideWorldBounds(true)
         // adding fist to a physics grp
-        this.fistGrp = scene.add.group([this.fist])
-
+        this.fistGrp = scene.physics.add.group([this.fist])
         //now how to move fist with body and on anims
 
+        if (player.attacking === true){ //if the player is attacking
+            this.fistGrp.x += 100
+        }
 
         // FIST COLLIDER THINGS<3 WIP --> From Fight Fighters
         this.collider = scene.physics.add.collider(enemy, this.fistGrp, () => {
