@@ -139,6 +139,7 @@ class MoveState extends State {
 class AttackState extends State {
     enter(scene, angel) {
         angel.setVelocity(0)
+        angel.fist.setVelocity(0)
         angel.anims.play(`angel-punch`)
         angel.attacking = true
         angel.fist.x += 80 //moving fist
