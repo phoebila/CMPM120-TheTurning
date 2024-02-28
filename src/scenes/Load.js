@@ -172,7 +172,7 @@ class Load extends Phaser.Scene {
         })
 
         // proceed once loading completes
-        // this.scene.start('titleScene')
-        this.scene.start('playScene') //debugging
+        this.scene.start('titleScene')
+        // this.scene.start('playScene') //debugging
     }
 }

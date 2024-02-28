@@ -155,7 +155,7 @@ class AttackState extends State {
 
         angel.enemy.health -= 5
 
-        console.log('blackfang health', angel.enemy.health);
+        // console.log('blackfang health', angel.enemy.health);
 
         if (angel.enemy.health <= 0){ //game over condition
             angel.enemy.health = 0
@@ -164,7 +164,6 @@ class AttackState extends State {
         }
         else { //decrease health bar
             angel.enemy.healthBar.setScale(angel.enemy.health/1000, 1)
-        // how to stop all health from draining?
         }
         
         angel.fist.destroy()
