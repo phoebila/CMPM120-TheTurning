@@ -152,7 +152,11 @@ class AttackState extends State {
         if (!angel.enemy.immune){
             angel.enemy.hurt = true
         }
+
         angel.enemy.health -= 5
+
+        console.log('blackfang health', angel.enemy.health);
+
         if (angel.enemy.health <= 0){ //game over condition
             angel.enemy.health = 0
             scene.gameOver = true
@@ -160,12 +164,23 @@ class AttackState extends State {
         }
         else { //decrease health bar
             angel.enemy.healthBar.setScale(angel.enemy.health/1000, 1)
-            // how to stop all health from draining?
-        } 
+        // how to stop all health from draining?
+        }
+        
+        angel.fist.destroy()
         }, null, scene)
 
         angel.once('animationcomplete', () => {
             angel.attacking = false
+
+            // create new fist
+            if (angel.fist.active == false){
+                angel.fist = scene.physics.add.sprite(angel.x+110, angel.y+35).setScale(3)
+                angel.fist.body.setCircle(5)
+                angel.fist.body.onCollide = true
+                angel.fist.body.setCollideWorldBounds(true)
+            }
+
             angel.fist.x -= 80 //moving fist    
             this.stateMachine.transition('idle')
         })

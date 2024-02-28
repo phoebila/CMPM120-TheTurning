@@ -161,10 +161,20 @@ class AttackStateFang extends State {
             else { //decrease health bar
                 fang.enemy.healthBar.setScale(fang.enemy.health/1000, 1)
             } 
+            fang.fist.destroy()
             }, null, scene)
 
         fang.once('animationcomplete', () => {
             fang.attacking = false;
+
+            // create new fist
+            if (fang.fist.active == false){
+                fang.fist = scene.physics.add.sprite(fang.x-40, fang.y+35).setScale(3)
+                fang.fist.body.setCircle(5)
+                fang.fist.body.onCollide = true
+                fang.fist.body.setCollideWorldBounds(true)
+            }
+
             fang.fist.x += 60 //moving fist back
             this.stateMachine.transition('idle')
         })
