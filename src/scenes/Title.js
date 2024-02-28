@@ -184,7 +184,7 @@ class Title extends Phaser.Scene{
                     duration: 800,
                     ease: 'Cubic.easeOut',
                     repeat: 0,
-                    y: "+= 300",
+                    y: "+= 250",
                 });
 
                 // next menu
