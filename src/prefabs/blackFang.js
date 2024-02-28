@@ -142,6 +142,7 @@ class MoveStateFang extends State {
 class AttackStateFang extends State {
     enter(scene, fang) {
         fang.setVelocity(0)
+        fang.fist.setVelocity(0)
         fang.anims.play(`fang-punch`)
         fang.attacking = true;
         fang.fist.x -= 60 //moving fist
@@ -230,6 +231,7 @@ class HurtStateFang extends State {
 class BlockStateFang extends State {
     enter(scene, fang){
         fang.setVelocity(0)
+        fang.fist.setVelocity(0)
         scene.sound.play('block') 
 
         // play block anims

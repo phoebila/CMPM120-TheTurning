@@ -235,6 +235,7 @@ class HurtState extends State {
 class BlockState extends State {
     enter(scene, angel){
         angel.setVelocity(0)
+        angel.fist.setVelocity(0)
         scene.sound.play('block') 
 
         // play block anims
