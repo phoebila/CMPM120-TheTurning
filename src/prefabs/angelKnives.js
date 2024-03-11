@@ -10,7 +10,7 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
         // look at big bodies examples for fist collider physics
         // in punch state change offset of fist collider object (look at net example)
         this.body.setCollideWorldBounds(true)
-        this.body.gravity.y = 500
+        this.body.gravity.y = 200
 
         // set custom Hero properties
         this.direction = direction 
@@ -55,23 +55,31 @@ class IdleState extends State {
     }
 
     execute(scene, angel) {
+
+        // create new fist
+        if (angel.fist.active == false){
+            angel.fist = scene.physics.add.sprite(angel.x+110, angel.y+35).setScale(3)
+            angel.fist.body.setCircle(5)
+            angel.fist.setVelocity(0)
+            angel.fist.body.onCollide = true
+            angel.fist.body.setCollideWorldBounds(true)
+        }
+
         // use destructuring to make a local copy of the keyboard object
         const { left, right, space, shift} = scene.keys
         const HKey = scene.keys.HKey
         const BKey = scene.keys.BKey
         const EnterKey = scene.keys.enter
 
-
-        // transition to swing if pressing space
+        // transition to swing if pressing enter
         if(Phaser.Input.Keyboard.JustDown(EnterKey)) {
             this.stateMachine.transition('attack')
             return
         }
 
-        // hurt if H key input (just for demo purposes)
-        if(Phaser.Input.Keyboard.JustDown(HKey)) {
-            this.stateMachine.transition('hurt')
-            return
+        // hurt if hurt is true
+        if (angel.hurt == true){
+            this.stateMachine.transition('hurt')    
         }
 
         // block if B key input
@@ -177,6 +185,7 @@ class AttackState extends State {
                 angel.fist = scene.physics.add.sprite(angel.x+110, angel.y+35).setScale(3)
                 angel.fist.body.setCircle(5)
                 angel.fist.body.onCollide = true
+                angel.fist.setVelocity(0)
                 angel.fist.body.setCollideWorldBounds(true)
             }
 
@@ -214,19 +223,24 @@ class HurtState extends State {
         // create knockback by sending body in direction opposite facing direction
         switch(angel.direction) {
             case 'left':
-                angel.setVelocityX(-angel.angelVelocity*2)
+                angel.setVelocityX(angel.angelVelocity*2)
+                angel.fist.setVelocityX(angel.angelVelocity*2)
                 break
             case 'right':
-                angel.setVelocityX(angel.angelVelocity*2)
+                angel.setVelocityX(-angel.angelVelocity*2)
+                angel.fist.setVelocityX(-angel.angelVelocity*2)
                 break
         }
 
-        angel.immune = true //angel is hit
+        angel.immune = true
+        angel.hurt = true
 
         // set recovery timer
         scene.time.delayedCall(angel.hurtTimer, () => {
+            console.log('done');
             angel.clearTint()
-            angel.immune = false; //angel can be hit again
+            angel.immune = false
+            angel.hurt = false
             this.stateMachine.transition('idle')
         })
     }
@@ -247,8 +261,6 @@ class BlockState extends State {
             angel.immune = false //angel is no longer blocking
             this.stateMachine.transition('idle')
         })
-
-        // angel.anims.stop()
 
     }
 }

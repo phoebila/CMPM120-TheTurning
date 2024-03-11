@@ -53,6 +53,16 @@ class IdleStateFang extends State {
     }
 
     execute(scene, fang) {
+
+        // create new fist
+        if (fang.fist.active == false){
+            fang.fist = scene.physics.add.sprite(fang.x-40, fang.y+35).setScale(3)
+            fang.fist.body.setCircle(5)
+            fang.fist.setVelocity(0)
+            fang.fist.body.onCollide = true
+            fang.fist.body.setCollideWorldBounds(true)
+        }
+
         // use destructuring to make a local copy of the keyboard object
         const AKey = scene.keys.AKey //left 
         const DKey = scene.keys.DKey //right
@@ -68,9 +78,13 @@ class IdleStateFang extends State {
         }
 
         // hurt if H key input (just for demo purposes)
-        if(Phaser.Input.Keyboard.JustDown(HKey)) {
-            this.stateMachine.transition('hurt')
-            return
+        // if(Phaser.Input.Keyboard.JustDown(HKey)) {
+        //     this.stateMachine.transition('hurt')
+        //     return
+        // }
+
+        if (fang.hurt == true){
+            this.stateMachine.transition('hurt')    
         }
 
         // block if R key input
@@ -173,6 +187,7 @@ class AttackStateFang extends State {
                 fang.fist = scene.physics.add.sprite(fang.x-40, fang.y+35).setScale(3)
                 fang.fist.body.setCircle(5)
                 fang.fist.body.onCollide = true
+                fang.fist.setVelocity(0)
                 fang.fist.body.setCollideWorldBounds(true)
             }
 
@@ -211,18 +226,22 @@ class HurtStateFang extends State {
         switch(fang.direction) {
             case 'left':
                 fang.setVelocityX(fang.fangVelocity*2)
+                fang.fist.setVelocityX(fang.fangVelocity*2)
                 break
             case 'right':
                 fang.setVelocityX(-fang.fangVelocity*2)
+                fang.fist.setVelocityX(-fang.fangVelocity*2)
                 break
         }
 
         fang.immune = true //fang is hit
+        fang.hurt = true
 
         // set recovery timer
         scene.time.delayedCall(fang.hurtTimer, () => {
             fang.clearTint()
             fang.immune = false; //fang can be hit again
+            fang.hurt = false
             this.stateMachine.transition('idle')
         })
     }

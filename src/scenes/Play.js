@@ -93,6 +93,7 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.angelKnives.fist, this.blackFang)
         this.physics.add.collider(this.blackFang, this.platform)
         this.physics.add.collider(this.blackFang.fist, this.angelKnives)
+        this.physics.add.collider(this.blackFang.fist, this.angelKnives.fist)
         this.physics.add.collider(this.angelKnives, this.blackFang)
 
         //game ender variables
