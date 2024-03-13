@@ -31,19 +31,13 @@ class Load extends Phaser.Scene {
             frameHeight: 64,
         })
 
-        this.load.path = './assets/'
-        this.load.spritesheet('ellieBG', 'sprites/EllieFrames.png', {
-            frameWidth: 512,
-            frameHeight: 512,
-        })
-        
-
         //main menu background: from kvanarsd on github! https://github.com/kvanarsd/Fight-Fighters/tree/main
         this.load.image('outline', 'sprites/Outline.png')
         this.load.image('lighting', 'sprites/lighting.png')
         this.load.image('mainBG', 'sprites/menuBG.png')
         this.load.image('instrucBG', 'sprites/menuINSTRUC.png')
         this.load.image('block_pixel', 'sprites/white_pixel.png')
+
 
         // ground --> platform
         this.load.image('platform', 'sprites/platform.png')
@@ -56,6 +50,9 @@ class Load extends Phaser.Scene {
 
         // health
         this.load.image('health', 'sprites/health.png')
+
+        //background movie
+        this.load.video('EllieBG', 'webm/ElliePixelMov.mp4', true);
 
         //audios -----------------------------
         //background
@@ -80,17 +77,6 @@ class Load extends Phaser.Scene {
     }
 
     create() {
-
-        // Ellie Frames ------------------------------------------------------------
-        this.anims.create({
-            key: 'ellie-bg',
-            frameRate: 8,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('ellieBG', 
-            { start: 0, end: 12 }),
-            yoyo: true
-        })
-
         // angel animations (idle) ------------------------------------------------------------
         this.anims.create({
             key: 'angel-idle',
