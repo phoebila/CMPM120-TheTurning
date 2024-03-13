@@ -53,9 +53,10 @@ class Play extends Phaser.Scene {
 
         arcadeOutline.setDepth(10)
         lighting.setDepth(11)
+
         // create webm of pixelized ellie playing!!!
-        this.background = this.add.video(0, 70, 'EllieBG').setOrigin(.1).setScale(.48)
-        this.background.play(true)
+        this.bg = this.add.sprite(30, -20, 'ellie-bg').setOrigin(0,0).setScale(1.4)
+        this.bg.anims.play(`ellie-bg`);
 
         // add new Angel Knives player to scene (scene, x, y, key, frame, direction)
         this.angelKnives = new AngelKnives(this, 145, 430, 'hero', 0, 'left').setScale(3)

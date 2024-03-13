@@ -19,4 +19,5 @@
         - [] Convert background video into frames
         - [x] add up arrow through all menu tweens
         - [x] fix fist velocity crashing bug
+        - [x] switch controls
 
