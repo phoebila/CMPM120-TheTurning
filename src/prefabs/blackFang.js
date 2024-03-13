@@ -167,14 +167,14 @@ class AttackStateFang extends State {
             if (!fang.enemy.immune){
                 fang.enemy.hurt = true
             }
-            fang.enemy.health -= 5
+            fang.enemy.health -= 10
             if (fang.enemy.health <= 0){ //game over condition
                 fang.enemy.health = 0
                 scene.gameOver = true
                 fang.enemy.healthBar.setScale(0, 1)
             }
             else { //decrease health bar
-                fang.enemy.healthBar.setScale(fang.enemy.health/1000, 1)
+                fang.enemy.healthBar.setScale(fang.enemy.health/100, 1)
             } 
             fang.fist.destroy()
             }, null, scene)
@@ -257,9 +257,14 @@ class BlockStateFang extends State {
         fang.anims.play(`fang-block`) //testing
         fang.immune = true //fang is blocking
 
+        // adding particles
+        this.blockParticles = scene.add.particles(fang.x, fang.y, 'block_pixel', {speed: 400, tint: 0xfff914, lifespan: 500})
+
+
         // set a short cooldown delay before going back to idle
         scene.time.delayedCall(fang.blockCoolDown, () => {
             fang.immune = false //fang is no longer blocking
+            this.blockParticles.stop()
             this.stateMachine.transition('idle')
         })
 

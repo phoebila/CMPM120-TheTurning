@@ -37,6 +37,8 @@ class Load extends Phaser.Scene {
         this.load.image('lighting', 'sprites/lighting.png')
         this.load.image('mainBG', 'sprites/menuBG.png')
         this.load.image('instrucBG', 'sprites/menuINSTRUC.png')
+        this.load.image('block_pixel', 'sprites/white_pixel.png')
+
 
         // ground --> platform
         this.load.image('platform', 'sprites/platform.png')

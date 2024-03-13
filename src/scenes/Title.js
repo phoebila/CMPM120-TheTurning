@@ -126,7 +126,7 @@ class Title extends Phaser.Scene{
                 });
 
                 var textIn = this.tweens.add({
-                    targets: [this.credz],
+                    targets: [this.credz, this.startGame],
                     duration: 800,
                     ease: 'Cubic.easeOut',
                     repeat: 0,
@@ -158,7 +158,7 @@ class Title extends Phaser.Scene{
                     y: "-= 500",
                 });
                 var menu3in = this.tweens.add({
-                    targets: this.instrucMenu,
+                    targets: [this.instrucMenu, this.startGame],
                     duration: 800,
                     ease: 'Cubic.easeOut',
                     repeat: 0,

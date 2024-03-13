@@ -48,6 +48,16 @@ class AngelKnives extends Phaser.Physics.Arcade.Sprite {
 // hero-specific state classes
 class IdleState extends State {
     enter(scene, angel) {
+
+        // create new fist to avoid crashing
+        if (angel.fist.active == false){
+            angel.fist = scene.physics.add.sprite(angel.x+110, angel.y+35).setScale(3)
+            angel.fist.body.setCircle(5)
+            angel.fist.setVelocity(0)
+            angel.fist.body.onCollide = true
+            angel.fist.body.setCollideWorldBounds(true)
+        }
+
         angel.setVelocity(0)
         angel.fist.setVelocity(0)
         angel.anims.play(`angel-idle`)
@@ -98,6 +108,16 @@ class IdleState extends State {
 
 class MoveState extends State {
     execute(scene, angel) {
+
+        // create new fist to avoid crashing
+        if (angel.fist.active == false){
+            angel.fist = scene.physics.add.sprite(angel.x+110, angel.y+35).setScale(3)
+            angel.fist.body.setCircle(5)
+            angel.fist.setVelocity(0)
+            angel.fist.body.onCollide = true
+            angel.fist.body.setCollideWorldBounds(true)
+        }
+
         // use destructuring to make a local copy of the keyboard object
         const { left, right, space, shift} = scene.keys
         const HKey = scene.keys.HKey
@@ -161,7 +181,7 @@ class AttackState extends State {
             angel.enemy.hurt = true
         }
 
-        angel.enemy.health -= 5
+        angel.enemy.health -= 10
 
         // console.log('blackfang health', angel.enemy.health);
 
@@ -171,7 +191,7 @@ class AttackState extends State {
             angel.enemy.healthBar.setScale(0, 1)
         }
         else { //decrease health bar
-            angel.enemy.healthBar.setScale(angel.enemy.health/1000, 1)
+            angel.enemy.healthBar.setScale(angel.enemy.health/100, 1)
         }
         
         angel.fist.destroy()
@@ -214,6 +234,16 @@ class AttackState extends State {
 
 class HurtState extends State {
     enter(scene, angel) {
+
+        // create new fist to avoid crashing
+        if (angel.fist.active == false){
+            angel.fist = scene.physics.add.sprite(angel.x+110, angel.y+35).setScale(3)
+            angel.fist.body.setCircle(5)
+            angel.fist.setVelocity(0)
+            angel.fist.body.onCollide = true
+            angel.fist.body.setCollideWorldBounds(true)
+        }
+
         angel.setVelocity(0)
         angel.fist.setVelocity(0)
         angel.anims.play(`angel-hurt`)
@@ -248,6 +278,16 @@ class HurtState extends State {
 
 class BlockState extends State {
     enter(scene, angel){
+
+        // create new fist to avoid crashing
+        if (angel.fist.active == false){
+            angel.fist = scene.physics.add.sprite(angel.x+110, angel.y+35).setScale(3)
+            angel.fist.body.setCircle(5)
+            angel.fist.setVelocity(0)
+            angel.fist.body.onCollide = true
+            angel.fist.body.setCollideWorldBounds(true)
+        }
+
         angel.setVelocity(0)
         angel.fist.setVelocity(0)
         scene.sound.play('block') 
@@ -256,9 +296,13 @@ class BlockState extends State {
         angel.anims.play(`angel-block`) //testing
         angel.immune = true //angel has blocked
 
+        // adding particles
+        this.blockParticles = scene.add.particles(angel.x, angel.y, 'block_pixel', {speed: 400, tint: 0xfff914, lifespan: 500})
+
         // set a short cooldown delay before going back to idle
         scene.time.delayedCall(angel.blockCoolDown, () => {
             angel.immune = false //angel is no longer blocking
+            this.blockParticles.stop()
             this.stateMachine.transition('idle')
         })
 

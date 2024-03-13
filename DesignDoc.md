@@ -6,12 +6,17 @@
         - [x] fist goes back to body once not in attack state
         - [x] fist is hidden within collision body
         - [x] if on impact with body sprite, move char health down by 10 pts
-        - [] if player in 'block' state, fist has no effect on health
+        - [x] if player in 'block' state, fist has no effect on health
     ### Health Bar
         - [x] deplete health bar based on collision of fist
-        - [] health bar correctly decreases
+        - [x] health bar correctly decreases
         - [x] if player health is 0 -> game over is true
     ### Stretch 
         - [] add Riley's narration based on random fight prompt
-        - [] fix lag issues
+        - [x] fix lag issues
+    ### Playtest Recs
+        - [x] Add particle effect for block
+        - [] Convert background video into frames
+        - [x] add up arrow through all menu tweens
+        - [] fix fist velocity crashing bug
 

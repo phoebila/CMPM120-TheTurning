@@ -66,8 +66,8 @@ class Play extends Phaser.Scene {
         this.add.image(645, 55, 'fangHeadshot').setScale(2)
 
         //health bars
-        this.angelKnives.healthBar = this.add.image(135,65, "health").setScale(.6).setOrigin(0,0.5);
-        this.blackFang.healthBar = this.add.image(625, 65, "health").setScale(.6).setOrigin(1,0.5);
+        this.angelKnives.healthBar = this.add.image(135,65, "health").setOrigin(0,0.5);
+        this.blackFang.healthBar = this.add.image(625, 65, "health").setOrigin(1,0.5);
 
         //setting enemies
         this.angelKnives.enemy = this.blackFang
