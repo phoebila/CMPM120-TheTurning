@@ -91,11 +91,13 @@ class Title extends Phaser.Scene{
         this.instructions = this.add.text(game.config.width/2, - borderPadding*2, 'how to play', textConfig).setOrigin(0.5,0.5);
         //Angel Knives
         this.player1 = this.add.text(borderPadding*6.8, - borderPadding*5.5, 'Angel Knives', textConfig).setOrigin(0,0.5);
-        this.buttons1 = this.add.text(borderPadding*8, - borderPadding, '←→ for Movement\nENTER for Punch\nSHIFT to Block', instructConfig).setOrigin(0,0.5);
-        this.buttons1.lineSpacing = 40
+        this.buttons2 = this.add.text(borderPadding*44, - borderPadding, '←→ for Movement\nENTER for Punch\nSHIFT to Block', instructConfig).setOrigin(1,0.5);
+
         // BlackFang
         this.player2 = this.add.text(borderPadding*45, - borderPadding*5.5, 'BlackFang', textConfig).setOrigin(1,0.5);
-        this.buttons2 = this.add.text(borderPadding*44, - borderPadding/1.2, 'AD for Movement\nF for Attack\nR to Block', instructConfig).setOrigin(1,0.5);
+        this.buttons1 = this.add.text(borderPadding*8, - borderPadding/1.2, 'AD for Movement\nF for Attack\nR to Block', instructConfig).setOrigin(0,0.5);
+        
+        this.buttons1.lineSpacing = 40
         this.buttons2.lineSpacing = 40
 
         //play intro music
@@ -180,7 +182,7 @@ class Title extends Phaser.Scene{
                     y: "+= 122",
                 });
                 var textInInstruc = this.tweens.add({
-                    targets: [this.player1, this.player2, this.buttons1, this.buttons2],
+                    targets: [this.player1, this.player2, this.buttons2, this.buttons1],
                     duration: 800,
                     ease: 'Cubic.easeOut',
                     repeat: 0,
