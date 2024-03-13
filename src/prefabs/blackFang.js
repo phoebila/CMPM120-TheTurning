@@ -46,6 +46,16 @@ class BlackFang extends Phaser.Physics.Arcade.Sprite {
 // hero-specific state classes
 class IdleStateFang extends State {
     enter(scene, fang) {
+
+        // create new fist to avoid crashing
+        if (fang.fist.active == false){
+            fang.fist = scene.physics.add.sprite(fang.x-40, fang.y+35).setScale(3)
+            fang.fist.body.setCircle(5)
+            fang.fist.setVelocity(0)
+            fang.fist.body.onCollide = true
+            fang.fist.body.setCollideWorldBounds(true)
+        }
+
         fang.setVelocity(0)
         fang.fist.setVelocity(0)
         fang.anims.play(`fang-idle`)
@@ -64,15 +74,21 @@ class IdleStateFang extends State {
         }
 
         // use destructuring to make a local copy of the keyboard object
-        const AKey = scene.keys.AKey //left 
-        const DKey = scene.keys.DKey //right
-        const FKey = scene.keys.FKey //attack
-        const RKey = scene.keys.RKey //block
-        const HKey = scene.keys.HKey //hurt 
+        // const AKey = scene.keys.AKey //left 
+        // const DKey = scene.keys.DKey //right
+        // const FKey = scene.keys.FKey //attack
+        // const RKey = scene.keys.RKey //block
+        // const HKey = scene.keys.HKey //hurt 
+
+         // use destructuring to make a local copy of the keyboard object
+         const { left, right, space, shift} = scene.keys
+         const HKey = scene.keys.HKey
+         const BKey = scene.keys.BKey
+         const EnterKey = scene.keys.enter
 
 
         // transition to swing if pressing space
-        if(Phaser.Input.Keyboard.JustDown(FKey)) {
+        if(Phaser.Input.Keyboard.JustDown(EnterKey)) {
             this.stateMachine.transition('attack')
             return
         }
@@ -88,13 +104,13 @@ class IdleStateFang extends State {
         }
 
         // block if R key input
-        if(Phaser.Input.Keyboard.JustDown(RKey)) {
+        if(Phaser.Input.Keyboard.JustDown(shift)) {
             this.stateMachine.transition('block')
             return
         }
 
         // transition to move if pressing a movement key
-        if(AKey.isDown || DKey.isDown) {
+        if(left.isDown || right.isDown) {
             this.stateMachine.transition('move')
             return
         }
@@ -103,16 +119,31 @@ class IdleStateFang extends State {
 
 class MoveStateFang extends State {
     execute(scene, fang) {
+
+        // create new fist to avoid crashing
+        if (fang.fist.active == false){
+            fang.fist = scene.physics.add.sprite(fang.x-40, fang.y+35).setScale(3)
+            fang.fist.body.setCircle(5)
+            fang.fist.setVelocity(0)
+            fang.fist.body.onCollide = true
+            fang.fist.body.setCollideWorldBounds(true)
+        }
+
         // use destructuring to make a local copy of the keyboard object
-        const AKey = scene.keys.AKey //left 
-        const DKey = scene.keys.DKey //right
-        const FKey = scene.keys.FKey //attack
-        const RKey = scene.keys.RKey //block
-        const HKey = scene.keys.HKey //hurt 
+        // const AKey = scene.keys.AKey //left 
+        // const DKey = scene.keys.DKey //right
+        // const FKey = scene.keys.FKey //attack
+        // const RKey = scene.keys.RKey //block
+        // const HKey = scene.keys.HKey //hurt 
+
+        const { left, right, space, shift} = scene.keys
+        const HKey = scene.keys.HKey
+        const BKey = scene.keys.BKey
+        const EnterKey = scene.keys.enter
 
 
         // transition to swing if pressing space
-        if(Phaser.Input.Keyboard.JustDown(FKey)) {
+        if(Phaser.Input.Keyboard.JustDown(EnterKey)) {
             this.stateMachine.transition('attack')
             return
         }
@@ -125,23 +156,23 @@ class MoveStateFang extends State {
         }
 
         // block if R key input
-        if(Phaser.Input.Keyboard.JustDown(RKey)) {
+        if(Phaser.Input.Keyboard.JustDown(shift)) {
             this.stateMachine.transition('block')
             return
         }
 
         // transition to idle if not pressing movement keys
-        if(!(AKey.isDown || DKey.isDown)) {
+        if(!(left.isDown || right.isDown)) {
             this.stateMachine.transition('idle')
             return
         }
 
         // handle movement
         let moveDirection = new Phaser.Math.Vector2(0, 0)
-        if(AKey.isDown) {
+        if(left.isDown) {
             moveDirection.x = -1
             fang.direction = 'left'
-        } else if(DKey.isDown) {
+        } else if(right.isDown) {
             moveDirection.x = 1
             fang.direction = 'right'
         }
@@ -216,6 +247,16 @@ class AttackStateFang extends State {
 
 class HurtStateFang extends State {
     enter(scene, fang) {
+
+        // create new fist to avoid crashing
+        if (fang.fist.active == false){
+            fang.fist = scene.physics.add.sprite(fang.x-40, fang.y+35).setScale(3)
+            fang.fist.body.setCircle(5)
+            fang.fist.setVelocity(0)
+            fang.fist.body.onCollide = true
+            fang.fist.body.setCollideWorldBounds(true)
+        }
+
         fang.setVelocity(0)
         fang.fist.setVelocity(0)
         fang.anims.play(`fang-hurt`)
@@ -249,6 +290,16 @@ class HurtStateFang extends State {
 
 class BlockStateFang extends State {
     enter(scene, fang){
+
+        // create new fist to avoid crashing
+        if (fang.fist.active == false){
+            fang.fist = scene.physics.add.sprite(fang.x-40, fang.y+35).setScale(3)
+            fang.fist.body.setCircle(5)
+            fang.fist.setVelocity(0)
+            fang.fist.body.onCollide = true
+            fang.fist.body.setCollideWorldBounds(true)
+        }
+
         fang.setVelocity(0)
         fang.fist.setVelocity(0)
         scene.sound.play('block') 

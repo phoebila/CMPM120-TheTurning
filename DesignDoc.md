@@ -18,5 +18,5 @@
         - [x] Add particle effect for block
         - [] Convert background video into frames
         - [x] add up arrow through all menu tweens
-        - [] fix fist velocity crashing bug
+        - [x] fix fist velocity crashing bug
 

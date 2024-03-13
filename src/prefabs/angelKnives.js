@@ -76,13 +76,19 @@ class IdleState extends State {
         }
 
         // use destructuring to make a local copy of the keyboard object
-        const { left, right, space, shift} = scene.keys
-        const HKey = scene.keys.HKey
-        const BKey = scene.keys.BKey
-        const EnterKey = scene.keys.enter
+        // const { left, right, space, shift} = scene.keys
+        // const HKey = scene.keys.HKey
+        // const BKey = scene.keys.BKey
+        // const EnterKey = scene.keys.enter
+
+        const AKey = scene.keys.AKey //left 
+        const DKey = scene.keys.DKey //right
+        const FKey = scene.keys.FKey //attack
+        const RKey = scene.keys.RKey //block
+        const HKey = scene.keys.HKey //hurt 
 
         // transition to swing if pressing enter
-        if(Phaser.Input.Keyboard.JustDown(EnterKey)) {
+        if(Phaser.Input.Keyboard.JustDown(FKey)) {
             this.stateMachine.transition('attack')
             return
         }
@@ -93,13 +99,13 @@ class IdleState extends State {
         }
 
         // block if B key input
-        if(Phaser.Input.Keyboard.JustDown(shift)) {
+        if(Phaser.Input.Keyboard.JustDown(RKey)) {
             this.stateMachine.transition('block')
             return
         }
 
         // transition to move if pressing a movement key
-        if(left.isDown || right.isDown) {
+        if(AKey.isDown || DKey.isDown) {
             this.stateMachine.transition('move')
             return
         }
@@ -119,13 +125,19 @@ class MoveState extends State {
         }
 
         // use destructuring to make a local copy of the keyboard object
-        const { left, right, space, shift} = scene.keys
-        const HKey = scene.keys.HKey
-        const BKey = scene.keys.BKey
-        const EnterKey = scene.keys.enter
+        // const { left, right, space, shift} = scene.keys
+        // const HKey = scene.keys.HKey
+        // const BKey = scene.keys.BKey
+        // const EnterKey = scene.keys.enter
+
+        const AKey = scene.keys.AKey //left 
+        const DKey = scene.keys.DKey //right
+        const FKey = scene.keys.FKey //attack
+        const RKey = scene.keys.RKey //block
+        const HKey = scene.keys.HKey //hurt 
 
         // transition to swing if pressing space
-        if(Phaser.Input.Keyboard.JustDown(EnterKey)) {
+        if(Phaser.Input.Keyboard.JustDown(FKey)) {
             this.stateMachine.transition('attack')
             return
         }
@@ -138,23 +150,23 @@ class MoveState extends State {
         }
 
         // block if B key input
-        if(Phaser.Input.Keyboard.JustDown(shift)) {
+        if(Phaser.Input.Keyboard.JustDown(RKey)) {
             this.stateMachine.transition('block')
             return
         }
 
         // transition to idle if not pressing movement keys
-        if(!(left.isDown || right.isDown)) {
+        if(!(AKey.isDown || DKey.isDown)) {
             this.stateMachine.transition('idle')
             return
         }
 
         // handle movement
         let moveDirection = new Phaser.Math.Vector2(0, 0)
-        if(left.isDown) {
+        if(AKey.isDown) {
             moveDirection.x = -1
             angel.direction = 'left'
-        } else if(right.isDown) {
+        } else if(DKey.isDown) {
             moveDirection.x = 1
             angel.direction = 'right'
         }
