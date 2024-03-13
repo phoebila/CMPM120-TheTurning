@@ -16,7 +16,7 @@
         - [x] fix lag issues
     ### Playtest Recs
         - [x] Add particle effect for block
-        - [] Convert background video into frames
+        - [] Convert background video into frames (nah)
         - [x] add up arrow through all menu tweens
         - [x] fix fist velocity crashing bug
         - [x] switch controls
